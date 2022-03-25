@@ -8,5 +8,5 @@ resources:
   - podSecurityPolicy.yaml
   - role.yaml
   - daemonSet.yaml
-  - service.yaml
+  - services.yaml
   - deployment.yaml
