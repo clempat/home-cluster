@@ -6,3 +6,5 @@ resources:
   - configmap.yaml
   - deployment.yaml
   - service.yaml
+
+namespace: dns-system
