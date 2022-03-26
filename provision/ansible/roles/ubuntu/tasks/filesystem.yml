@@ -18,3 +18,10 @@
   loop:
     - swap
     - none
+
+- name: Start iscsid
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+  loop:
+    - iscsid
