@@ -8,4 +8,4 @@ spec:
   type: discord
   channel: notifications
   secretRef:
-    name: DISCORT_URL
+    name: DISCORD_URL
