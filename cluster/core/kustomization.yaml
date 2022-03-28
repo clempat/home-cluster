@@ -11,3 +11,4 @@ resources:
   - etcd
   - coredns
   - external-dns
+  - longhorn
