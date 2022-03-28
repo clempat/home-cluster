@@ -7,7 +7,6 @@ resources:
   - kube-system
   - metallb-system
   - system-upgrade
-  - longhorn
   - etcd
   - coredns
   - external-dns
