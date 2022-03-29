@@ -37,26 +37,23 @@ spec:
     - name: homeassistant
       databases:
         - homeassistant
-    - name: vaultwarden
-      databases:
-        - vaultwarden
     - name: authelia
       databases:
         - authelia
-  #  backups:
-  #    pgbackrest:
-  #      global:
-  #        repo1-retention-incr: "7"
-  #        repo1-retention-incr-type: count
-  #      repos:
-  #        - name: repo1
-  #          schedules:
-  #            incremental: 0 1 * * *
-  #          volume:
-  #            volumeClaimSpec:
-  #              accessModes:
-  #                - ReadWriteMany
-  #              resources:
-  #                requests:
-  #                  storage: 3Gi
-  #              storageClassName: nfs-provisioner
+  backups:
+    pgbackrest:
+      global:
+        repo1-retention-incr: "7"
+        repo1-retention-incr-type: count
+      repos:
+        - name: repo1
+          schedules:
+            incremental: 0 1 * * *
+          volume:
+            volumeClaimSpec:
+              accessModes:
+                - ReadWriteMany
+              resources:
+                requests:
+                  storage: 3Gi
+              storageClassName: longhorn # Change later to nfs
