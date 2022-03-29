@@ -16,7 +16,7 @@ spec:
         - name: authelia
           namespace: default
       services:
-        - name: longhorn
+        - name: longhorn-frontend
           port: 80
           namespace: longhorn-system
   tls:
