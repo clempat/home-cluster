@@ -17,8 +17,6 @@ spec:
           port: 9091
           namespace: authentication-system
   tls:
-    hosts:
-      - "auth.${SECRET_DOMAIN}"
     secretName: auth-tls
 
 ---
