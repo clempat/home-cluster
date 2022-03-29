@@ -1,0 +1,39 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: authelia
+  namespace: default
+  labels:
+    app.kubernetes.io/name: authelia
+spec:
+  entryPoints:
+    - https
+  routes:
+    - kind: Rule
+      match: Host(`auth.${SECRET_DOMAIN}`)
+      services:
+        - name: authelia
+          port: 9091
+          namespace: authentication-system
+  tls:
+    hosts:
+      - "auth.${SECRET_DOMAIN}"
+    secretName: auth-tls
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: authelia
+  namespace: default
+  labels:
+    app.kubernetes.io/name: authelia
+spec:
+  forwardAuth:
+    address: http://authelia.authentication-system.svc.cluster.local:9091/api/verify?rd=https://auth.${SECRET_DOMAIN}
+    trustForwardHeader: true
+    authResponseHeaders:
+      - Remote-User
+      - Remote-Groups

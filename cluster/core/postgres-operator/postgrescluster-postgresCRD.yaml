@@ -1,0 +1,62 @@
+---
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: pgo-cluster
+spec:
+  metadata:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+  postgresVersion: 14
+  patroni:
+    dynamicConfiguration:
+      synchronous_mode: true
+      postgresql:
+        synchronous_commit: on
+        pg_hba:
+          - hostnossl all all 10.244.0.0/16 md5
+          - hostssl all all all md5
+  instances:
+    - name: instance1
+      dataVolumeClaimSpec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 3Gi
+    - name: instance2
+      dataVolumeClaimSpec:
+        storageClassName: longhorn
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 3Gi
+  users:
+    - name: homeassistant
+      databases:
+        - homeassistant
+    - name: vaultwarden
+      databases:
+        - vaultwarden
+    - name: authelia
+      databases:
+        - authelia
+  #  backups:
+  #    pgbackrest:
+  #      global:
+  #        repo1-retention-incr: "7"
+  #        repo1-retention-incr-type: count
+  #      repos:
+  #        - name: repo1
+  #          schedules:
+  #            incremental: 0 1 * * *
+  #          volume:
+  #            volumeClaimSpec:
+  #              accessModes:
+  #                - ReadWriteMany
+  #              resources:
+  #                requests:
+  #                  storage: 3Gi
+  #              storageClassName: nfs-provisioner
