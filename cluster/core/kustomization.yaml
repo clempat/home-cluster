@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - namespaces
   - default
+  - authentication-system
   - notification
   - cert-manager
   - kube-system
