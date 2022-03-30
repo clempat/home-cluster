@@ -6,6 +6,7 @@ metadata:
   namespace: longhorn-system
   labels:
     app.kubernetes.io/name: longhorn
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
   entryPoints:
     - https
@@ -21,4 +22,6 @@ spec:
           port: 80
           namespace: longhorn-system
   tls:
-    secretName: longhorn-tls
+    - hosts:
+        - "longhorn.${SECRET_DOMAIN}"
+      secretName: longhorn-tls
