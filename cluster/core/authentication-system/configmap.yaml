@@ -67,8 +67,8 @@ data:
       disable_startup_check: false
       smtp:
         host: smtp.fastmail.com
-        port: 587
-        username: clement@${SECRET_DOMAIN}
+        port: 465
+        username: ${SECRET_AUTHELIA_EMAIL_0}
         sender: "Authelia Admin <admin@${SECRET_DOMAIN}>"
 
   users.yaml: |
