@@ -66,7 +66,7 @@ data:
     notifier:
       disable_startup_check: false
       smtp:
-        host: smtp.gmail.com
+        host: smtp.fastmail.com
         port: 587
         username: clement@${SECRET_DOMAIN}
         sender: "Authelia Admin <admin@${SECRET_DOMAIN}>"
