@@ -73,9 +73,9 @@ spec:
             failureThreshold: 5
           env:
             - name: AUTHELIA_JWT_SECRET_FILE
-              value: /app//secrets/jwt_secret
+              value: /app/secrets/jwt_secret
             - name: AUTHELIA_DUO_API_SECRET_KEY_FILE
-              value: /app//secrets/duo_api_secret_key
+              value: /app/secrets/duo_api_secret_key
             - name: AUTHELIA_SESSION_SECRET_FILE
               value: /app/secrets/session_secret
             - name: AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
