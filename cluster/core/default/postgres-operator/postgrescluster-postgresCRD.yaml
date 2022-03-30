@@ -25,14 +25,14 @@ spec:
         resources:
           requests:
             storage: 3Gi
-    - name: instance2
-      dataVolumeClaimSpec:
-        storageClassName: longhorn
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 3Gi
+    # - name: instance2
+    #   dataVolumeClaimSpec:
+    #     storageClassName: longhorn
+    #     accessModes:
+    #       - ReadWriteOnce
+    #     resources:
+    #       requests:
+    #         storage: 3Gi
   users:
     - name: homeassistant
       databases:
