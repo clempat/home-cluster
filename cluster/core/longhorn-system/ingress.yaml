@@ -4,20 +4,27 @@ kind: Ingress
 metadata:
   name: longhorn
   namespace: longhorn-system
-  labels:
+  annotations:
+    hajimari.io/enable: "true"
     app.kubernetes.io/name: longhorn
     cert-manager.io/cluster-issuer: "letsencrypt-production"
-    traefik.ingress.kubernetes.io/router.middleware: default-authelia@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.middleware: "longhorn-system-svc-longhorn-headers@kubernetescrd,default-authelia@kubernetescrd"
+    nginx.ingress.kubernetes.io/proxy-body-size: 10000m
 spec:
   ingressClassName: "traefik"
   rules:
     - host: "longhorn.${SECRET_DOMAIN}"
       http:
-        - backend:
-            service:
-              name: longhorn-frontend
-              port:
-                number: 80
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: longhorn-frontend
+                port:
+                  number: 80
   tls:
     - hosts:
         - "longhorn.${SECRET_DOMAIN}"
