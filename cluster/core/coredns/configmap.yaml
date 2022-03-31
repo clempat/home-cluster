@@ -1,0 +1,39 @@
+---
+# Source: coredns/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-coredns
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/instance: "custom"
+    helm.sh/chart: "coredns-1.16.7"
+    k8s-app: "coredns"
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: "CoreDNS"
+    app.kubernetes.io/name: coredns
+data:
+  Corefile: |-
+    .:53 {
+        errors
+        health {
+            lameduck 5s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        prometheus 0.0.0.0:9153
+        cache 30
+        loop
+        reload
+        loadbalance
+        forward . 1.1.1.1:53
+        etcd ${SECRET_DOMAIN} {
+            stubzones
+            path /skydns
+            endpoint http://10.43.252.107:2379
+        }
+    }
