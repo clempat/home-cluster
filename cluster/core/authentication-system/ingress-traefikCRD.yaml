@@ -1,23 +1,27 @@
 ---
 apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+kind: Ingress
 metadata:
   name: authelia
   namespace: default
   labels:
     app.kubernetes.io/name: authelia
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
-  entryPoints:
-    - https
-  routes:
-    - kind: Rule
-      match: Host(`auth.${SECRET_DOMAIN}`)
-      services:
-        - name: authelia
-          port: 9091
-          namespace: authentication-system
+  ingressClassName: "traefik"
   tls:
-    secretName: auth-tls
+    - hosts:
+        - "auth.${SECRET_DOMAIN}"
+      secretName: "authelia-tls"
+  rules:
+    - host: "auth.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - backend:
+              service:
+                name: authelia
+                port:
+                  number: 9091
 
 ---
 
