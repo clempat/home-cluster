@@ -8,3 +8,4 @@ resources:
   - longhorn-system.yaml
   - dns-system.yaml
   - authentication-system.yaml
+  - home-system.yaml

@@ -1,0 +1,23 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homeassistant
+  labels:
+    app.kubernetes.io/name: homeassistant
+  annotations:
+    external-dns.alpha.kubernetes.io/internal-hostname: home.${SECRET_DOMAIN}
+spec:
+  entryPoints:
+    - https
+  routes:
+    - kind: Rule
+      match: Host(`home.${SECRET_DOMAIN}`)
+      middlewares:
+        - name: headers@file
+      services:
+        - name: homeassistant
+          port: 8123
+          namespace: default
+  tls:
+    secretName: home-tls

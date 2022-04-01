@@ -1,0 +1,79 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeassistant
+  labels:
+    app.kubernetes.io/name: homeassistant
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: homeassistant
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: homeassistant
+    spec:
+      containers:
+        - name: homeassistant
+          image: ghcr.io/home-assistant/home-assistant:2022.3.8
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 250Mi
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 8123
+          volumeMounts:
+            - name: homeassistant-configs
+              mountPath: /config
+          startupProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 0
+            timeoutSeconds: 1
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 0
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 30
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 0
+            timeoutSeconds: 3
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
+          envFrom:
+            - secretRef:
+                name: homeassistant-secrets
+          env:
+            - name: TZ
+              value: ${CONFIG_TIMEZONE}
+            - name: postgresql_uri
+              valueFrom:
+                secretKeyRef:
+                  name: pgo-cluster-pguser-homeassistant
+                  key: uri
+      dnsPolicy: ClusterFirst
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+      volumes:
+        - name: homeassistant-configs
+          persistentVolumeClaim:
+            claimName: homeassistant-config
