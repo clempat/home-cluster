@@ -8,9 +8,9 @@ spec:
   routes:
     - kind: Rule
       match: Host(`longhorn.${SECRET_DOMAIN}`)
-      middlewares:
-        - name: authelia
-          namespace: authentication-system
+      # middlewares:
+      #   - name: authelia
+      #     namespace: authentication-system
       services:
         - kind: Service
           name: longhorn-frontend
