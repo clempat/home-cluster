@@ -42,14 +42,12 @@ spec:
           links:
             - name: Discord
               url: "https://discord.com"
-            - name: Gmail
-              url: "https://gmail.com"
-            - name: Slack
-              url: "https://slack.com/signin"
+            - name: Mail
+              url: "https://fastmail.com"
         - name: Cloud
           links:
-            - name: Box
-              url: "https://box.com"
+            - name: Pcloud
+              url: "https://pcloud.com"
             - name: Dropbox
               url: "https://dropbox.com"
             - name: Drive
@@ -88,8 +86,8 @@ spec:
               url: "https://youtube.com/feed/subscriptions"
         - name: Reading
           links:
-            - name: Instapaper
-              url: "https://www.instapaper.com/u"
+            - name: Reader
+              url: "https://read.reaswise.com"
             - name: Medium
               url: "http://medium.com"
             - name: Reddit
@@ -112,13 +110,13 @@ spec:
           hajimari.io/icon: "weather-sunset"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         hosts:
-          - host: "hajimari.${SECRET_DOMAIN}"
+          - host: "www.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "hajimari.${SECRET_DOMAIN}"
+              - "www.${SECRET_DOMAIN}"
             secretName: "hajimari-tls"
     persistence:
       data:
