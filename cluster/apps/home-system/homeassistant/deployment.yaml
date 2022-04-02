@@ -67,7 +67,7 @@ spec:
                 secretKeyRef:
                   name: pgo-cluster-pguser-homeassistant
                   key: uri
-      dnsPolicy: ClusterFirst
+      dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       securityContext:
         runAsUser: 0
