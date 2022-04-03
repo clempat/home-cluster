@@ -21,4 +21,6 @@ spec:
   upgrade:
     remediation:
       retries: 3
-  values: {}
+  values:
+    defaultSettings:
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
