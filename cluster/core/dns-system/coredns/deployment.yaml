@@ -38,7 +38,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 30
       serviceAccountName: default
-      dnsPolicy: clusterFirst
+      dnsPolicy: ClusterFirst
       containers:
         - name: "coredns"
           image: "coredns/coredns:1.8.7"
