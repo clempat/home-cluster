@@ -34,6 +34,6 @@ data:
         etcd ${SECRET_DOMAIN} {
             stubzones
             path /skydns
-            endpoint http://etcd.cluster.local:2379
+            endpoint http://etcd.dns-system.svc.cluster.local:2379
         }
     }

@@ -28,4 +28,4 @@ spec:
             - --domain-filter=${SECRET_DOMAIN}
           env:
             - name: ETCD_URLS
-              value: http://etcd.cluster.local:2379
+              value: http://etcd.dns-system.svc.cluster.local:2379
