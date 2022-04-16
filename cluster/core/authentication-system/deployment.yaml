@@ -107,6 +107,7 @@ spec:
             - name: TZ
               value: ${CONFIG_TIMEZONE}
       enableServiceLinks: false
+      dnsPolicy: ClusterFirst
       volumes:
         - name: authelia-config
           configMap:
