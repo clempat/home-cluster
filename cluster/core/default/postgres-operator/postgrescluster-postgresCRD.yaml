@@ -10,6 +10,7 @@ spec:
   postgresVersion: 14
   patroni:
     dynamicConfiguration:
+      cluster_domain: cluster.local
       synchronous_mode: true
       postgresql:
         synchronous_commit: on
