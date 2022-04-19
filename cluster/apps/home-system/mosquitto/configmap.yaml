@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: release-name-mosquitto-config
+  labels:
+    helm.sh/chart: mosquitto-4.2.0
+    app.kubernetes.io/name: mosquitto
+data:
+  mosquitto.conf: |
+    listener 1883
+    allow_anonymous true
+
+    listener 9001
+    protocol websockets

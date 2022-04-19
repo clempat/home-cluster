@@ -1,0 +1,25 @@
+---
+# Source: mosquitto/templates/common.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-mosquitto
+  labels:
+    app.kubernetes.io/name: mosquitto
+  annotations:
+spec:
+  type: LoadBalancer
+  externalIPs:
+    - "${METTALLB_MQTT_ADDR}"
+  ports:
+    - port: 1883
+      targetPort: mqtt
+      protocol: TCP
+      name: mqtt
+    - port: 9001
+      targetPort: websocket
+      protocol: TCP
+      name: websocket
+  selector:
+    app.kubernetes.io/name: mosquitto
+    app.kubernetes.io/instance: release-name
