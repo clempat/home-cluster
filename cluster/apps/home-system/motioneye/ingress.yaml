@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: motioneye
+  namespace: home-system
+  labels:
+    app.kubernetes.io/name: motioneye
+  annotations:
+    hajimari.io/enable: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: "security.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: motioneye-service
+                port:
+                  number: 8765
+  tls:
+    - hosts:
+        - "security.${SECRET_DOMAIN}"
+      secretName: security-tls
