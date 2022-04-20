@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: release-name-frigate-config
+  labels:
+    app.kubernetes.io/name: frigate
+data:
+  config.yml: |
+    mqtt:
+      host: ${METTALLB_MQTT_ADDR}:1883
+    cameras:
+      front:
+        ffmpeg:
+          inputs:
+            - path: ${FRONT_CAMERA_RTSP_MAIN}
+              roles:
+                - detect
+                - rtsp
+        detect:
+          width: 2560
+          height: 1920

@@ -5,3 +5,4 @@ resources:
   - homeassistant
   - mosquitto
   - motioneye
+  - frigate

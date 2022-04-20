@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-frigate
+  labels:
+    helm.sh/chart: frigate-8.0.0
+    app.kubernetes.io/name: frigate
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: frigate
+      app.kubernetes.io/instance: release-name
+  template:
+    metadata:
+      annotations:
+        configmap/checksum: ff7b837f2cc2267d59611e5ae550606184859a0b19b9d13c9048fdaf5b61a2ee
+      labels:
+        app.kubernetes.io/name: frigate
+        app.kubernetes.io/instance: release-name
+    spec:
+
+      serviceAccountName: default
+      automountServiceAccountToken: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: release-name-frigate
+          image: "blakeblackshear/frigate:stable-amd64"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: false
+          env:
+            - name: "FRIGATE_RTSP_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: frigate-secrets
+                  key: frigate_rtsp_password
+            - name: "TZ"
+              value: "Europe/Berlin"
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          volumeMounts:
+            - name: cache
+              mountPath: /dev/shm
+            - name: config
+              mountPath: /config/config.yml
+              subPath: config.yml
+          livenessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi
+        - name: config
+          configMap:
+            name: release-name-frigate-config
