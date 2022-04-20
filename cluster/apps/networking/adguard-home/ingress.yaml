@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adguard
+  namespace: networking
+  labels:
+    app.kubernetes.io/name: adguard
+  annotations:
+    hajimari.io/enable: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: "adguard.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: adguard-home
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - "adguard.${SECRET_DOMAIN}"
+      secretName: security-tls

@@ -1,0 +1,15 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: adguard-home-config
+  labels:
+    helm.sh/chart: adguard-home-5.2.0
+    app.kubernetes.io/name: adguard-home
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+  storageClassName: longhorn

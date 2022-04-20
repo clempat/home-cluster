@@ -8,7 +8,8 @@ metadata:
     app.kubernetes.io/name: frigate
 spec:
   revisionHistoryLimit: 3
-  replicas: 1
+  # Do no deploy it as it looks like not working well with my hardware
+  replicas: 0
   strategy:
     type: Recreate
   selector:
