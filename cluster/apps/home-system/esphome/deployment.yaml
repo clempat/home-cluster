@@ -20,7 +20,8 @@ spec:
     spec:
       serviceAccountName: default
       automountServiceAccountToken: true
-      dnsPolicy: ClusterFirst
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
       enableServiceLinks: true
       containers:
         - name: release-name-esphome
