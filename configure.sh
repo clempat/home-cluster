@@ -36,32 +36,39 @@ main() {
         verify_cloudflare
         success
     else
-        # sops configuration file
+        # generate sops configuration file
         envsubst < "${PROJECT_DIR}/tmpl/.sops.yaml" \
             > "${PROJECT_DIR}/.sops.yaml"
-        # cluster
+        # generate cluster settings
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cluster-settings.yaml" \
             > "${PROJECT_DIR}/cluster/base/cluster-settings.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/gotk-sync.yaml" \
             > "${PROJECT_DIR}/cluster/base/flux-system/gotk-sync.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/kube-vip-daemonset.yaml" \
             > "${PROJECT_DIR}/cluster/core/kube-system/kube-vip/daemon-set.yaml"
+        # generate cluster secrets
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cluster-secrets.sops.yaml" \
             > "${PROJECT_DIR}/cluster/base/cluster-secrets.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cert-manager-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/core/cert-manager/secret.sops.yaml"
         envsubst < "${PROJECT_DIR}/tmpl/cluster/cloudflare-ddns-secret.sops.yaml" \
             > "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
+        envsubst < "${PROJECT_DIR}/tmpl/cluster/external-dns-secret.sops.yaml" \
+            > "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
+        # encrypt cluster secrets
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/base/cluster-secrets.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/core/cert-manager/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/cloudflare-ddns/secret.sops.yaml"
-        # terraform
+        sops --encrypt --in-place "${PROJECT_DIR}/cluster/apps/networking/external-dns/secret.sops.yaml"
+        # generate terraform secrets
         envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
             > "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
+        # encrypt terraform secrets
         sops --encrypt --in-place "${PROJECT_DIR}/provision/terraform/cloudflare/secret.sops.yaml"
-        # ansible
+        # generate ansible settings
         envsubst < "${PROJECT_DIR}/tmpl/ansible/kube-vip.yml" \
             > "${PROJECT_DIR}/provision/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
+        # generate ansible hosts file and secrets
         generate_ansible_hosts
         generate_ansible_host_secrets
     fi
@@ -173,13 +180,16 @@ verify_metallb() {
     local ip_floor=
     local ip_ceil=
     _has_envar "BOOTSTRAP_METALLB_LB_RANGE"
+    _has_envar "BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR"
     _has_envar "BOOTSTRAP_METALLB_TRAEFIK_ADDR"
 
     ip_floor=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f1)
     ip_ceil=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f2)
 
+    # TODO(configure.sh): More checks on valid IP addressing
     _has_valid_ip "${ip_floor}" "BOOTSTRAP_METALLB_LB_RANGE"
     _has_valid_ip "${ip_ceil}" "BOOTSTRAP_METALLB_LB_RANGE"
+    _has_valid_ip "${BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR}" "BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR"
     _has_valid_ip "${BOOTSTRAP_METALLB_TRAEFIK_ADDR}" "BOOTSTRAP_METALLB_TRAEFIK_ADDR"
 }
 
@@ -309,18 +319,20 @@ generate_ansible_hosts() {
         printf "  children:\n"
         printf "    master:\n"
         printf "      hosts:\n"
+        master_node_count=0
         worker_node_count=0
         for var in "${!BOOTSTRAP_ANSIBLE_HOST_ADDR_@}"; do
             node_id=$(echo "${var}" | awk -F"_" '{print $5}')
             node_control="BOOTSTRAP_ANSIBLE_CONTROL_NODE_${node_id}"
             if [[ "${!node_control}" == "true" ]]; then
+                master_node_count=$((master_node_count+1))
                 node_hostname="BOOTSTRAP_ANSIBLE_HOSTNAME_${node_id}"
                 host_key="${!node_hostname:-${default_control_node_prefix}}"
                 if [ "${host_key}" == "${default_control_node_prefix}" ]; then
                     node_hostname=${default_control_node_prefix}${node_id}
                 else
                     node_hostname=${!node_hostname}
-            fi
+                fi
                 printf "        %s:\n" "${node_hostname}"
                 printf "          ansible_host: %s\n" "${!var}"
             else

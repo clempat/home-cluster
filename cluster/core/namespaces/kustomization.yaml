@@ -9,3 +9,4 @@ resources:
   - dns-system.yaml
   - authentication-system.yaml
   - home-system.yaml
+  - system-upgrade.yaml
