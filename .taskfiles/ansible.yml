@@ -52,11 +52,13 @@ tasks:
     cmds:
       - "ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --one-line -m 'ping'"
 
+
   adhoc:uptime:
     desc: Uptime of all the hosts
     dir: provision/ansible
     cmds:
       - ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml --one-line -a 'uptime'
+
 
   adhoc:reboot:
     desc: Reboot all the k8s nodes
