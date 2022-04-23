@@ -10,4 +10,3 @@ resources:
   - kube-system
   - metallb-system
   - longhorn-system
-  - dns-system
