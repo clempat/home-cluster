@@ -3,14 +3,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: longhorn
-  namespace: longhorn-system
+  namespace: storage
   labels:
     app.kubernetes.io/name: longhorn
   annotations:
     hajimari.io/enable: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    # traefik.ingress.kubernetes.io/router.middleware: "longhorn-system-svc-longhorn-headers@kubernetescrd"
     nginx.ingress.kubernetes.io/proxy-body-size: 10000m
 spec:
   ingressClassName: "traefik"
