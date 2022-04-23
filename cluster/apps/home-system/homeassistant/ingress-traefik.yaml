@@ -10,7 +10,8 @@ metadata:
     hajimari.io/enable: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    # traefik.ingress.kubernetes.io/router.middleware: "longhorn-system-svc-longhorn-headers@kubernetescrd"
+    external-dns.alpha.kubernetes.io/target: "home.${SECRET_DOMAIN}"
+    external-dns/is-public: "true"
 spec:
   ingressClassName: "traefik"
   rules:
