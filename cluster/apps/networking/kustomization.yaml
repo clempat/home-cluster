@@ -8,3 +8,4 @@ resources:
   - k8s-gateway
   - traefik
   - adguard-home
+  - wildcard-tls
