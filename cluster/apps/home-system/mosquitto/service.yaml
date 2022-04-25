@@ -9,8 +9,7 @@ metadata:
   annotations:
 spec:
   type: LoadBalancer
-  externalIPs:
-    - "${METTALLB_MQTT_ADDR}"
+  loadBalancerIP: "${METTALLB_MQTT_ADDR}"
   ports:
     - port: 1883
       targetPort: mqtt
