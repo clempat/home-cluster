@@ -90,7 +90,7 @@ spec:
         pathType: Prefix
         ingressClassName: "traefik"
         hosts:
-          - &host "alert-manager.${SECRET_PUBLIC_DOMAIN}"
+          - &host "alert-manager.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
@@ -175,14 +175,14 @@ spec:
         pathType: Prefix
         ingressClassName: "traefik"
         hosts:
-          - &host "prometheus.${SECRET_PUBLIC_DOMAIN}"
+          - &host "prometheus.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
-      thanosService:
-        enabled: true
-      thanosServiceMonitor:
-        enabled: true
+      # thanosService:
+      #   enabled: true
+      # thanosServiceMonitor:
+      #   enabled: true
       prometheusSpec:
         replicas: 3
         replicaExternalLabelName: "replica"
@@ -201,15 +201,15 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
-        thanos:
-          image: quay.io/thanos/thanos:v0.25.2
-          version: v0.25.2
-          objectStorageConfig:
-            name: thanos-objstore-secret
-            key: objstore.yml
-        resources:
-          requests:
-            cpu: 250m
-            memory: 2000Mi
-          limits:
-            memory: 6000Mi
+        #  thanos:
+        #    image: quay.io/thanos/thanos:v0.25.2
+        #    version: v0.25.2
+        #    objectStorageConfig:
+        #      name: thanos-objstore-secret
+        #      key: objstore.yml
+        #  resources:
+        #    requests:
+        #      cpu: 250m
+        #      memory: 2000Mi
+        #    limits:
+        #      memory: 6000Mi
