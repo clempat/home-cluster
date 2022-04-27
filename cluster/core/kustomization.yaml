@@ -10,3 +10,4 @@ resources:
   - kube-system
   - metallb-system
   - storage
+  - monitoring

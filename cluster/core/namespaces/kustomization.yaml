@@ -10,3 +10,4 @@ resources:
   - authentication-system.yaml
   - home-system.yaml
   - system-upgrade.yaml
+  - monitoring.yaml
