@@ -7,3 +7,4 @@ resources:
   - traefik
   - postgres-operator
   - rook-ceph
+  - external-snapshotter

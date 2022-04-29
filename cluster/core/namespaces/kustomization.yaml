@@ -12,3 +12,4 @@ resources:
   - monitoring.yaml
   - kasten-io.yaml
   - longhorn.yaml
+  - rook-ceph.yaml

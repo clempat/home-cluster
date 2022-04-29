@@ -29,7 +29,7 @@ spec:
     eula:
       accept: true
       company: clempat
-      email: clempat@@users.noreply.github.com
+      email: clempat@users.noreply.github.com
     global:
       persistence:
         storageClass: ceph-block

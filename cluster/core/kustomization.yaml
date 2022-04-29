@@ -5,10 +5,10 @@ resources:
   - namespaces
   # - longhorn
   - default
-  # - rook-ceph
+  - rook-ceph
   # - authentication-system
   - notification
   - cert-manager
   - kube-system
   - metallb-system
-  # - monitoring
+  - monitoring
