@@ -11,3 +11,4 @@ resources:
   - system-upgrade.yaml
   - monitoring.yaml
   - kasten-io.yaml
+  - longhorn.yaml
