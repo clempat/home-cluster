@@ -6,3 +6,4 @@ resources:
   - system-upgrade-controller
   - traefik
   - postgres-operator
+  - rook-ceph

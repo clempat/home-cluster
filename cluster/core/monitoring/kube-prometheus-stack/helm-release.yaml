@@ -100,7 +100,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: "longhorn"
+              storageClassName: "ceph-block"
               resources:
                 requests:
                   # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
@@ -197,7 +197,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "longhorn"
+              storageClassName: "ceph-block"
               resources:
                 requests:
                   storage: 10Gi

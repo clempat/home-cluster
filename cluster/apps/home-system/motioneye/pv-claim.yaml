@@ -9,7 +9,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: longhorn
+  storageClassName: ceph-block
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -21,4 +21,4 @@ spec:
   resources:
     requests:
       storage: 40Gi
-  storageClassName: longhorn
+  storageClassName: ceph-block

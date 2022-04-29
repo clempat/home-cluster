@@ -5,9 +5,9 @@ resources:
   - cert-manager.yaml
   - metallb-system.yaml
   - networking.yaml
-  - storage.yaml
   - dns-system.yaml
   - authentication-system.yaml
   - home-system.yaml
   - system-upgrade.yaml
   - monitoring.yaml
+  - kasten-io.yaml

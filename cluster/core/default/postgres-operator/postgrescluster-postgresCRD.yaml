@@ -19,7 +19,7 @@ spec:
   instances:
     - name: instance1
       dataVolumeClaimSpec:
-        storageClassName: longhorn
+        storageClassName: ceph-block
         accessModes:
           - ReadWriteOnce
         resources:
@@ -27,7 +27,7 @@ spec:
             storage: 3Gi
     - name: instance2
       dataVolumeClaimSpec:
-        storageClassName: longhorn
+        storageClassName: ceph-block
         accessModes:
           - ReadWriteOnce
         resources:
@@ -56,4 +56,4 @@ spec:
               resources:
                 requests:
                   storage: 3Gi
-              storageClassName: longhorn # Change later to nfs
+              storageClassName: ceph-block # Change later to nfs
