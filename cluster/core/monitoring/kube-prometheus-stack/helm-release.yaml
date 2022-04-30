@@ -137,7 +137,7 @@ spec:
       enabled: true
       endpoints:
         - 192.168.30.156
-        - 192.168.30.110
+        - 192.168.30.124
         - 192.168.30.125
       service:
         enabled: true
@@ -147,7 +147,7 @@ spec:
       enabled: true
       endpoints:
         - 192.168.30.156
-        - 192.168.30.110
+        - 192.168.30.124
         - 192.168.30.125
       service:
         enabled: true
@@ -157,13 +157,13 @@ spec:
       enabled: true
       endpoints:
         - 192.168.30.156
-        - 192.168.30.110
+        - 192.168.30.124
         - 192.168.30.125
     kubeEtcd:
       enabled: true
       endpoints:
         - 192.168.30.156
-        - 192.168.30.110
+        - 192.168.30.124
         - 192.168.30.125
       service:
         enabled: true
