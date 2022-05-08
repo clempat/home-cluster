@@ -9,7 +9,6 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: ceph-block
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -21,4 +20,3 @@ spec:
   resources:
     requests:
       storage: 40Gi
-  storageClassName: ceph-block
