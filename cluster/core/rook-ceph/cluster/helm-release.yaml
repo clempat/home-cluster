@@ -54,13 +54,13 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: k8s-3
+          - name: k8s-agent-1
             devices:
               - name: "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"
-          - name: k8s-4
+          - name: k8s-agent-2
             devices:
               - name: "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"
-          - name: k8s-5
+          - name: k8s-agent-3
             devices:
               - name: "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"
     cephBlockPoolsVolumeSnapshotClass:
