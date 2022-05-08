@@ -6,5 +6,5 @@ resources:
   - kube-system
   - networking
   # - system-upgrade
-  # - home-system
+  - home-system
   - kasten-io
