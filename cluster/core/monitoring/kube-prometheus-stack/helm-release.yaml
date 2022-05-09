@@ -95,7 +95,7 @@ spec:
           - hosts:
               - *host
       alertmanagerSpec:
-        replicas: 3
+        replicas: 1
         podAntiAffinity: hard
         storage:
           volumeClaimTemplate:
@@ -183,7 +183,7 @@ spec:
       # thanosServiceMonitor:
       #   enabled: true
       prometheusSpec:
-        replicas: 3
+        replicas: 1
         replicaExternalLabelName: "replica"
         podAntiAffinity: hard
         ruleSelectorNilUsesHelmValues: false
