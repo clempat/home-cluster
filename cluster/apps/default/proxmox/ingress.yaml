@@ -26,4 +26,4 @@ spec:
   tls:
     - hosts:
         - "proxmox.${SECRET_DOMAIN}"
-      secretName: cloud-tls
+      secretName: proxmox-tls
