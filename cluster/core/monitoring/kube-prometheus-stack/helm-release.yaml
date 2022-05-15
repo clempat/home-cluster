@@ -94,7 +94,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: "alert-manager-tls"
+            secretName: "${SECRET_DOMAIN/./-}-tls"
       alertmanagerSpec:
         replicas: 1
         podAntiAffinity: hard
@@ -179,7 +179,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: "prometheus-tls"
+            secretName: "${SECRET_DOMAIN/./-}-tls"
       # thanosService:
       #   enabled: true
       # thanosServiceMonitor:
