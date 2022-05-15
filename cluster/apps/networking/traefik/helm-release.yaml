@@ -63,10 +63,7 @@ spec:
       - "--providers.kubernetesingress.ingressendpoint.ip=${METALLB_TRAEFIK_ADDR}"
       - "--providers.kubernetesingress.allowexternalnameservices=true"
       - "--providers.kubernetescrd.allowexternalnameservices=true"
-    providers:
-      kubernetesIngress:
-        publishedService:
-          enabled: true
+      - "--providers.kubernetesingress.publishedservice.enabled=true"
     ports:
       traefik:
         expose: true
