@@ -23,14 +23,14 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 3Gi
+            storage: 10Gi
     - name: instance2
       dataVolumeClaimSpec:
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 3Gi
+            storage: 10Gi
   users:
     - name: homeassistant
       databases:
@@ -53,4 +53,4 @@ spec:
                 - ReadWriteMany
               resources:
                 requests:
-                  storage: 3Gi
+                  storage: 10Gi
