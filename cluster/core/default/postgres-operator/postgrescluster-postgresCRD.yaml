@@ -23,8 +23,15 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi
+            storage: 3Gi
     - name: instance2
+      dataVolumeClaimSpec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 3Gi
+    - name: instance3
       dataVolumeClaimSpec:
         accessModes:
           - ReadWriteOnce
@@ -53,4 +60,4 @@ spec:
                 - ReadWriteMany
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: 3Gi
