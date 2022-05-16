@@ -14,11 +14,14 @@ spec:
       postgresql:
         synchronous_commit: on
         pg_hba:
-          - hostnossl all all 10.42.0.0/16 md5
+          - local all all peer
+          - host all all 10.42.0.0/16 md5
+          - host all all 10.43.0.0/16 md5
           - hostssl all all all md5
   instances:
     - name: instance1
       dataVolumeClaimSpec:
+        storageClassName: longhorn
         accessModes:
           - ReadWriteOnce
         resources:
@@ -26,11 +29,13 @@ spec:
             storage: 10Gi
     - name: instance2
       dataVolumeClaimSpec:
+        storageClassName: longhorn
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
             storage: 10Gi
+
   users:
     - name: homeassistant
       databases:
