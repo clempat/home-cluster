@@ -12,3 +12,4 @@ resources:
   - kube-system
   - metallb-system
   - monitoring
+  - nfs-system
