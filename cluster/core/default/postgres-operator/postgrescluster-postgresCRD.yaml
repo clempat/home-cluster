@@ -46,8 +46,8 @@ spec:
   backups:
     pgbackrest:
       global:
-        repo1-retention-incr: "7"
-        repo1-retention-incr-type: count
+        repo1-retention-full: "2"
+        repo1-retention-full-type: time
       repos:
         - name: repo1
           schedules:
