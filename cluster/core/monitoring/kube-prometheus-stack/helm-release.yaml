@@ -87,6 +87,8 @@ spec:
             equal: ["alertname", "namespace"]
       ingress:
         enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         pathType: Prefix
         ingressClassName: "traefik"
         hosts:
@@ -94,6 +96,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: alert-manager-tls
       alertmanagerSpec:
         replicas: 1
         podAntiAffinity: hard
@@ -170,6 +173,8 @@ spec:
         targetPort: 2381
     prometheus:
       ingress:
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         enabled: true
         pathType: Prefix
         ingressClassName: "traefik"
@@ -178,6 +183,7 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: tls-prometheus
       # thanosService:
       #   enabled: true
       # thanosServiceMonitor:
