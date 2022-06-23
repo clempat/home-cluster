@@ -138,7 +138,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints:
-        - 192.168.30.119
+        # - 192.168.30.119
         - 192.168.30.210
         - 192.168.30.124
       service:
@@ -148,7 +148,7 @@ spec:
     kubeScheduler:
       enabled: true
       endpoints:
-        - 192.168.30.119
+        # - 192.168.30.119
         - 192.168.30.210
         - 192.168.30.124
       service:
@@ -158,13 +158,13 @@ spec:
     kubeProxy:
       enabled: true
       endpoints:
-        - 192.168.30.119
+        # - 192.168.30.119
         - 192.168.30.210
         - 192.168.30.124
     kubeEtcd:
       enabled: true
       endpoints:
-        - 192.168.30.119
+        # - 192.168.30.119
         - 192.168.30.210
         - 192.168.30.124
       service:
