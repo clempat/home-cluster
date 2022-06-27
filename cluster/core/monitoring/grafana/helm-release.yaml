@@ -121,6 +121,7 @@ spec:
       tls:
         - hosts:
             - *host
+          secretName: tls-grafana
     persistence:
       enabled: true
       type: statefulset
