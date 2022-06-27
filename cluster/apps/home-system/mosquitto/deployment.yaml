@@ -38,6 +38,8 @@ spec:
             - name: mosquitto-config
               mountPath: /mosquitto/config/mosquitto.conf
               subPath: mosquitto.conf
+            - name: mosquitto-data
+              mountPath: /mosquitto/data
           livenessProbe:
             tcpSocket:
               port: 1883
@@ -63,3 +65,6 @@ spec:
         - name: mosquitto-config
           configMap:
             name: mosquitto-config
+        - name: mosquitto-data
+          persistentVolumeClaim:
+            claimName: mosquitto-data
