@@ -15,3 +15,4 @@ resources:
   - rook-ceph.yaml
   - nfs-system.yaml
   - postgres-operator.yaml
+  - external-services.yaml
