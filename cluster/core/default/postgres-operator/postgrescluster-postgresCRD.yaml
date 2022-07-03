@@ -43,6 +43,10 @@ spec:
     - name: authelia
       databases:
         - authelia
+  monitoring:
+    pgmonitor:
+      exporter:
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.1.1-0
   backups:
     pgbackrest:
       global:
