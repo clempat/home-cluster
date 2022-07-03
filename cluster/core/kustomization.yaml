@@ -13,3 +13,4 @@ resources:
   - metallb-system
   - monitoring
   - nfs-system
+  - postgres-operator
