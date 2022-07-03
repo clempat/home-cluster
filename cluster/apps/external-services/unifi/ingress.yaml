@@ -25,4 +25,4 @@ spec:
   tls:
     - hosts:
         - *host
-      secretName: tls-unifi
+      secretName: "${SECRET_DOMAIN/./-}-tls"
