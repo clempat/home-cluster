@@ -6,6 +6,6 @@ resources:
   - cloudflare-ddns
   - external-dns
   - k8s-gateway
+  - wildcard-tls
   - traefik
   # - adguard-home
-  - wildcard-tls
