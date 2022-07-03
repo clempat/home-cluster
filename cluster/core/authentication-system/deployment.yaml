@@ -108,7 +108,7 @@ spec:
                   name: pgo-cluster-pguser-authelia
                   key: user
             - name: TZ
-              value: ${CONFIG_TIMEZONE}
+              value: ${TIMEZONE}
       enableServiceLinks: false
       dnsPolicy: ClusterFirst
       volumes:

@@ -8,3 +8,5 @@ resources:
   # - system-upgrade
   - home-system
   # - kasten-io
+  - external-services
+  - monitoring

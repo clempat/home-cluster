@@ -2,28 +2,30 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: proxmox
-  namespace: default
+  name: cloud
+  namespace: external-services
   labels:
-    app.kubernetes.io/name: proxmox
+    app.kubernetes.io/name: cloud
   annotations:
     hajimari.io/enable: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    external-dns/is-public: "true"
 spec:
   ingressClassName: "traefik"
   rules:
-    - host: "proxmox.${SECRET_DOMAIN}"
+    - host: "cloud.${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: proxmox
+                name: cloud
                 port:
-                  number: 8006
+                  number: 9000
   tls:
     - hosts:
-        - "proxmox.${SECRET_DOMAIN}"
-      secretName: proxmox-tls
+        - "cloud.${SECRET_DOMAIN}"
+      secretName: cloud-tls
