@@ -68,7 +68,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: zwave2js-tls
+            secretName: zwavejs2mqtt-tls
     securityContext:
       privileged: true
     persistence:
