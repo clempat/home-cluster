@@ -25,21 +25,21 @@ spec:
   dependsOn:
     - name: node-feature-discovery
       namespace: kube-system
-  # postRenderers:
-  #   - kustomize:
-  #       patchesStrategicMerge:
-  #         - kind: Deployment
-  #           apiVersion: apps/v1
-  #           metadata:
-  #             name: release-name-zwavejs2mqtt
-  #           spec:
-  #             template:
-  #               spec:
-  #                 tolerations:
-  #                   - key: "hardware"
-  #                     operator: "Equal"
-  #                     value: "rpi"
-  #                     effect: "NoExecute"
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: zwavejs2mqtt
+            spec:
+              template:
+                spec:
+                  tolerations:
+                    - key: "hardware"
+                      operator: "Equal"
+                      value: "rpi"
+                      effect: "NoExecute"
   values:
     global:
       nameOverride: *app
