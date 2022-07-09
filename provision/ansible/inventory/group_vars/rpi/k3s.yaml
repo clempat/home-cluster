@@ -15,4 +15,3 @@ k3s_agent:
     - "hardware=rpi:NoExecute"
   node-label:
     - "hardware=rpi"
-    - "node-role.kubernetes.io/worker=true"
