@@ -55,19 +55,22 @@ spec:
               - device
           custom:
             - name: zwave
-              matchOn:
-                - usbId:
+              matchFeatures:
+                - feature: usb.device
+                  matchExpressions:
                     class: ["02"]
                     vendor: ["0658"]
                     device: ["0200"]
             - name: intel-gpu
-              matchOn:
-                - pciId:
+              matchFeatures:
+                - feature: pci.device
+                  matchExpressions:
                     class: ["0300"]
                     vendor: ["8086"]
             - name: zigbee
-              matchOn:
-                - usbId:
+              matchFeatures:
+                - feature: usb.device
+                  matchExpressions:
                     class: ["02"]
                     vendor: ["1cf1"]
                     device: ["0030"]
