@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: truenas
+  namespace: external-services
+  labels:
+    app.kubernetes.io/name: truenas
+  annotations:
+    hajimari.io/enable: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: "nas.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: truenas
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "nas.${SECRET_DOMAIN}"
+      secretName: nas-tls
