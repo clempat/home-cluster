@@ -85,7 +85,7 @@ spec:
         enabled: true
         type: nfs
         server: "${CONFIG_NFS_SERVER_ADDRESS}"
-        path: "${CONFIG_NFS_SERVER_PATH}/Backups/zwavejs2mqtt"
+        path: "${CONFIG_NFS_SERVER_PATH}/zwavejs2mqtt"
         mountPath: /usr/src/app/store/backups
         readOnly: false
     affinity:
