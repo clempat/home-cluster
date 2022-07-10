@@ -55,6 +55,8 @@ spec:
               - device
           custom:
             - name: zwave
+              labels:
+                zwave: "true"
               matchFeatures:
                 - feature: usb.device
                   matchExpressions:
@@ -62,12 +64,16 @@ spec:
                     vendor: ["0658"]
                     device: ["0200"]
             - name: intel-gpu
+              labels:
+                gpu: "true"
               matchFeatures:
                 - feature: pci.device
                   matchExpressions:
                     class: ["0300"]
                     vendor: ["8086"]
             - name: zigbee
+              labels:
+                yigbee: "true"
               matchFeatures:
                 - feature: usb.device
                   matchExpressions:
