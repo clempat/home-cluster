@@ -59,6 +59,9 @@ spec:
     ingress:
       main:
         enabled: true
+        annotations:
+          hajimari.io/enable: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         ingressClassName: "traefik"
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
