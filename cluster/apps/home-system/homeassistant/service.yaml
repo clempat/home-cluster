@@ -5,6 +5,9 @@ metadata:
   name: homeassistant
   labels:
     app.kubernetes.io/name: homeassistant
+    hajimari.io/enable: "true"
+    hajimari.io/icon: "home-automation"
+    hajimari.io/name: "Home Assistant"
 spec:
   selector:
     app.kubernetes.io/name: homeassistant

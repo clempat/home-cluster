@@ -8,6 +8,8 @@ metadata:
     app.kubernetes.io/name: truenas
   annotations:
     hajimari.io/enable: "true"
+    hajimari.io/icon: "tape-drive"
+    hajimari.io/name: "TrueNAS"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
