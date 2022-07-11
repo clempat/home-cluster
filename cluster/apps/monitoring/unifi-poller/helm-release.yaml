@@ -27,17 +27,25 @@ spec:
       repository: docker.io/golift/unifi-poller
       tag: 2.1.3
     env:
-      TZ: "${TIMEZONE}"
-      UP_UNIFI_DEFAULT_ROLE: "homelab-controller"
-      UP_UNIFI_DEFAULT_URL: "https://unifi.${SECRET_LOCAL_DOMAIN}"
-      UP_UNIFI_DEFAULT_VERIFY_SSL: false
-      UP_UNIFI_DEFAULT_USER: "unifipoller"
-      UP_UNIFI_DEFAULT_PASS: "unifipoller"
-      UP_UNIFI_DEFAULT_SAVE_SITES: true
-      UP_UNIFI_DEFAULT_SAVE_DPI: false
-      UP_INFLUXDB_DISABLE: true
-      UP_PROMETHEUS_DISABLE: false
-      UP_PROMETHEUS_NAMESPACE: "unifipoller"
+      - {name: "TZ", value: "${TIMEZONE}"}
+      - {name: "UP_UNIFI_DEFAULT_ROLE", value: "homelab-controller"}
+      - {name: "UP_UNIFI_DEFAULT_URL", value: "https://unifi.${SECRET_LOCAL_DOMAIN}"}
+      - {name: "UP_UNIFI_DEFAULT_VERIFY_SSL", value: false}
+      - name: UP_UNIFI_DEFAULT_USER
+        valueFrom:
+          secretKeyRef:
+            name: unifipoller-secrets
+            key: user
+      - name: UP_UNIFI_DEFAULT_PASS
+        valueFrom:
+          secretKeyRef:
+            name: unifipoller-secrets
+            key: password
+      - {name: "UP_UNIFI_DEFAULT_SAVE_SITES", value: true }
+      - {name: "UP_UNIFI_DEFAULT_SAVE_DPI", value: false }
+      - {name: "UP_INFLUXDB_DISABLE", value: true }
+      - {name: "UP_PROMETHEUS_DISABLE", value: false }
+      - {name: "UP_PROMETHEUS_NAMESPACE", value: "unifipoller" }
     metrics:
       enabled: true
       serviceMonitor:
