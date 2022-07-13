@@ -48,7 +48,7 @@ spec:
           volumeMounts:
             - mountPath: /root/.hyperion
               name: data
-            - mountPath: /backups
+            - mountPath: /mnt
               name: backups
             - mountPath: /dev/video0
               name: usb
