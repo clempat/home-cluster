@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hyperion
+  namespace: home-system
+  labels:
+    app.kubernetes.io/name: homeassistant
+  annotations:
+    hajimari.io/enable: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: "hyperion.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hyperion
+                port:
+                  number: 8090
+  tls:
+    - hosts:
+        - "hyperion.${SECRET_DOMAIN}"
+      secretName: hyperion-tls

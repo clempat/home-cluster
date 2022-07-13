@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hyperion
+  name: hyperion
+  namespace: home-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hyperion
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hyperion
+    spec:
+      containers:
+        - image: sirfragalot/hyperion.ng:2.0.13
+          imagePullPolicy: IfNotPresent
+          name: hyperion
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8090
+            timeoutSeconds: 1
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8090
+            timeoutSeconds: 1
+          ports:
+            - containerPort: 19445
+              hostPort: 19445
+              protocol: TCP
+            - containerPort: 19444
+              hostPort: 19444
+              protocol: TCP
+            - containerPort: 8090
+              hostPort: 8090
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /root/.hyperion
+              name: data
+            - mountPath: /backups
+              name: backups
+            - mountPath: /dev/video0
+              name: usb
+          env:
+            - name: TZ
+              value: Europe/Berlin
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      restartPolicy: Always
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: feature.node.kubernetes.io/vid2usb
+                    operator: In
+                    values:
+                      - "true"
+      tolerations:
+        - key: "hardware"
+          operator: "Equal"
+          value: "rpi"
+          effect: "NoExecute"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hyperion-claim
+        - name: backups
+          nfs:
+            server: "${CONFIG_NFS_SERVER_ADDRESS}"
+            path: "${CONFIG_NFS_SERVER_PATH}/hyperion"
+        - name: usb
+          hostPath:
+            type: CharDevice
+            path: /dev/video0
