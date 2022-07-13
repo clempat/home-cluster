@@ -48,8 +48,9 @@ spec:
           volumeMounts:
             - mountPath: /root/.hyperion
               name: data
-            - mountPath: /mnt
-              name: backups
+            # TODO: Add backups and job for backup
+            # - mountPath: /mnt
+            #   name: backups
             - mountPath: /dev/video0
               name: usb
           env:
@@ -76,10 +77,10 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: hyperion-claim
-        - name: backups
-          nfs:
-            server: "${CONFIG_NFS_SERVER_ADDRESS}"
-            path: "${CONFIG_NFS_SERVER_PATH}/hyperion"
+        # - name: backups
+        #   nfs:
+        #     server: "${CONFIG_NFS_SERVER_ADDRESS}"
+        #     path: "${CONFIG_NFS_SERVER_PATH}/hyperion"
         - name: usb
           hostPath:
             type: CharDevice
