@@ -60,8 +60,6 @@ spec:
           env:
             - name: TZ
               value: ${TIMEZONE}
-            - name: DB_ENGINE
-              value: django.db.backends.postgresql
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
@@ -84,6 +82,10 @@ spec:
                   key: password
             - name: POSTGRES_DB
               value: recipes
+            - name: DEBUG
+              value: "1"
+            - name: SQL_DEBUG
+              value: "1"
       dnsPolicy: ClusterFirst
       hostNetwork: true
       volumes:
