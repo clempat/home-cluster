@@ -5,7 +5,7 @@ metadata:
   name: hyperion
   namespace: home-system
   labels:
-    app.kubernetes.io/name: homeassistant
+    app: hyperion
   annotations:
     hajimari.io/enable: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-production"

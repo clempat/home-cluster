@@ -4,12 +4,12 @@ kind: Service
 metadata:
   name: hyperion
   labels:
-    app.kubernetes.io/name: hyperion
+    app: hyperion
     hajimari.io/enable: "true"
     hajimari.io/icon: "television"
 spec:
   selector:
-    app.kubernetes.io/name: hyperion
+    app: hyperion
   ports:
     - name: http
       protocol: TCP
