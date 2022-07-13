@@ -43,6 +43,9 @@ spec:
     - name: authelia
       databases:
         - authelia
+    - name: recipes
+      databases:
+        - recipes
   monitoring:
     pgmonitor:
       exporter:

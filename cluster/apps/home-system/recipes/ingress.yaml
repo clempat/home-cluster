@@ -1,0 +1,31 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: recipes
+  namespace: home-system
+  labels:
+    app.kubernetes.io/name: recipes
+  annotations:
+    hajimari.io/enable: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    # external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    # external-dns/is-public: "true"
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: "recipes.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: recipes
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - "recipes.${SECRET_DOMAIN}"
+      secretName: home-tls

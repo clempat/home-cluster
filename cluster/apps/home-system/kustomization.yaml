@@ -10,3 +10,4 @@ resources:
   - esphome
   - zwavejs2mqtt
   - hyperion
+  - recipes
