@@ -15,10 +15,12 @@ spec:
       protocol: TCP
       port: 8090
       targetPort: http
-    - protocol: TCP
+    - name: api
+      protocol: TCP
       port: 19444
       targetPort: 19444
-    - protocol: TCP
+    - name: api2
+      protocol: TCP
       port: 19445
       targetPort: 19445
   type: ClusterIP
