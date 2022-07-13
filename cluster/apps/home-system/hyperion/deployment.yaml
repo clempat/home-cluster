@@ -45,6 +45,7 @@ spec:
             - containerPort: 8090
               hostPort: 8090
               protocol: TCP
+              name: http
           volumeMounts:
             - mountPath: /root/.hyperion
               name: data
