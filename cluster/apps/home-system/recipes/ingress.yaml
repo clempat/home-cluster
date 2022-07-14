@@ -28,4 +28,4 @@ spec:
   tls:
     - hosts:
         - "recipes.${SECRET_DOMAIN}"
-      secretName: home-tls
+      secretName: recipes-tls
