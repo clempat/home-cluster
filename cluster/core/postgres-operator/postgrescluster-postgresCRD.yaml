@@ -46,7 +46,7 @@ spec:
     - name: recipes
       databases:
         - recipes
-      options: "SUPERUSER"
+      options: "NOSUPERUSER"
   monitoring:
     pgmonitor:
       exporter:
