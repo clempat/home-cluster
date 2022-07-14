@@ -86,8 +86,6 @@ spec:
               value: "1"
             - name: SQL_DEBUG
               value: "1"
-      dnsPolicy: ClusterFirst
-      hostNetwork: true
       volumes:
         - name: recipes-static-files
           persistentVolumeClaim:
