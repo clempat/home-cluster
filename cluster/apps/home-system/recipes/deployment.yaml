@@ -60,6 +60,8 @@ spec:
           env:
             - name: TZ
               value: ${TIMEZONE}
+            - name: DB_ENGINE
+              value: django.db.backends.postgresql
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
