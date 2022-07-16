@@ -54,6 +54,8 @@ spec:
             #   name: backups
             - mountPath: /dev/video0
               name: usb
+          securityContext:
+            privileged: true
           env:
             - name: TZ
               value: Europe/Berlin
