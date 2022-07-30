@@ -1,0 +1,47 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: valheim-backups
+  namespace: games
+  labels:
+    app.kubernetes.io/name: valheim
+spec:
+  storageClassName: nfs-provisioner
+  accessModes:
+    - "ReadWriteMany"
+  resources:
+    requests:
+      storage: "10Gi"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: valheim-server-world-data
+  namespace: games
+  labels:
+    app.kubernetes.io/name: valheim
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "5Gi"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: valheim-server-base-data
+  namespace: games
+  labels:
+    app.kubernetes.io/name: valheim
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
