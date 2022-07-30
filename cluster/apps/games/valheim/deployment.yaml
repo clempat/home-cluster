@@ -38,8 +38,6 @@ spec:
                 secretKeyRef:
                   name: valheim-secrets
                   key: DISCORD_WEBHOOK
-            - name: SERVER_PUBLIC
-              value: "false"
             - name: TZ
               value: 'Europe/Berlin'
             - name: SERVER_PORT
