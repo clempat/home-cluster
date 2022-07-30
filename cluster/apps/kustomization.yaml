@@ -10,3 +10,4 @@ resources:
   # - kasten-io
   - external-services
   - monitoring
+  - games

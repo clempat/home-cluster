@@ -16,3 +16,4 @@ resources:
   - nfs-system.yaml
   - postgres-operator.yaml
   - external-services.yaml
+  - games.yaml

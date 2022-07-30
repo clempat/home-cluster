@@ -1,0 +1,31 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &app valheim
+  namespace: games
+  labels:
+    app.kubernetes.io/name: *app
+  annotations:
+    hajimari.io/enable: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    external-dns/is-public: "true"
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: "valheim.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: valheim-server
+                port:
+                  number: 2456
+  tls:
+    - hosts:
+        - "valheim.${SECRET_DOMAIN}"
+      secretName: valheim-tls

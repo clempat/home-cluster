@@ -1,0 +1,80 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: valheim
+  namespace: games
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: valheim-k8s
+      version: 1.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: valheim-k8s-charts
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    worldName: berlin
+    serverName: just-one-beer
+    password: "${SECRET_VALHEIM_PASSWORD}"
+
+    resources: {}
+
+    image:
+      repository: lloesche/valheim-server
+      tag: latest
+
+    storage:
+      kind: hostvol
+      hostvol:
+        path: /data/valheim
+      storageClass: longhorn
+      pvc:
+        size: 1Gi
+
+    serverStorage:
+      kind: hostvol
+      hostvol:
+        path: /data/valheim-server
+      storageClass: longhorn
+      pvc:
+        size: 5Gi
+
+    networking:
+      serviceType: LoadBalancer
+      gamePort: 2456
+      publishQueryPort: "true"
+      nodePort: 30373
+
+
+    nodeSelector: {}
+
+    tolerations: {}
+
+    # If you utilize priority classes, you can define the priority class for this deployment here
+    # priorityClassName: my-priority-class-name
+
+    # resources:
+    #   requests:
+    #     memory: "4Gi"
+    #     cpu: "2000m"
+
+    # extraEnvironmentVars:
+    #   BACKUPS: true
+    #   BACKUPS_CRON: "0 * * * *"
+    #   BACKUPS_MAX_AGE: 3
+    #   POST_BACKUP_HOOK: "timeout 300 scp -i /extraVolumes/backup-ssh-key/ssh-privatekey -o StrictHostKeyChecking=no @BACKUP_FILE@ myself@example.com:~/valheim_backups/$(basename @BACKUP_FILE@)"
+
+    # extraVolumes:
+    # - type: secret
+    #   name: backup-ssh-key
+    #   defaultMode: 0600
