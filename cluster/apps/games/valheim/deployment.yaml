@@ -50,6 +50,8 @@ spec:
               value: "Starting Valheim Server"
             - name: PRE_BOOTSTRAP_HOOK
               value: 'curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$$(eval echo $$DISCORD_MESSAGE)\"}" "$$DISCORD_WEBHOOK"'
+            - name: STATUS_HTTP
+              value: 'true'
           ports:
             - containerPort: 2456
               name: gameport
