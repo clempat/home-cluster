@@ -108,6 +108,10 @@
       "matchDatasources": ["helm"],
       "matchUpdateTypes": ["patch"],
       "labels": ["renovate/helm", "dep/patch"]
+    },
+    {
+       "matchPackageNames": ["ghcr.io/home-assistant/home-assistant"],
+       "versioning": "regex:^(?<major>\\d+\\.\\d+)\\.(?<patch>\\d+)$"
     }
   ]
 }
