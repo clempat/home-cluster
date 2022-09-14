@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zwavejs2mqtt
+  labels:
+    app.kubernetes.io/name: zwavejs2mqtt
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    hajimari.io/enable: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - "zwave.${SECRET_DOMAIN}"
+      secretName: "zwave-tls"
+  rules:
+    - host: "zwave.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: zwavejs2mqtt
+                port:
+                  number: 8091

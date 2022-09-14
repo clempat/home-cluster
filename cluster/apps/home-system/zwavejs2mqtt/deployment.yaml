@@ -1,0 +1,105 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zwavejs2mqtt
+  labels:
+    app.kubernetes.io/name: zwavejs2mqtt
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: zwavejs2mqtt
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: zwavejs2mqtt
+    spec:
+      tolerations:
+        - key: "hardware"
+          operator: "Equal"
+          value: "rpi"
+          effect: "NoExecute"
+      serviceAccountName: default
+      automountServiceAccountToken: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: zwavejs2mqtt
+          image: "ghcr.io/zwave-js/zwavejs2mqtt:6.16.0"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          env:
+            # - name: "NETWORK_KEY"
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: zwavejs2mqtt-secrets
+            #       key: NETWORK_KEY
+            - name: "TZ"
+              value: "${TIMEZONE}"
+          ports:
+            - name: http
+              containerPort: 8091
+              protocol: TCP
+            - name: websocket
+              containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - name: backup
+              mountPath: /usr/src/app/store/backups
+            - name: config
+              mountPath: /usr/src/app/store
+            - name: usb
+              mountPath: /dev/serial/by-id/usb-0658_0200-if00
+          livenessProbe:
+            tcpSocket:
+              port: 8091
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8091
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 8091
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+          resources:
+            limits:
+              memory: 500Mi
+            requests:
+              cpu: 10m
+              memory: 100Mi
+      volumes:
+        - name: backup
+          nfs:
+            server: ${CONFIG_NFS_SERVER_ADDRESS}
+            path: ${CONFIG_NFS_SERVER_PATH}/zwavejs2mqtt
+        - name: config
+          persistentVolumeClaim:
+            claimName: zwavejs2mqtt-config-v1
+        - name: usb
+          hostPath:
+            path: /dev/serial/by-id/usb-0658_0200-if00
+            type: CharDevice
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: feature.node.kubernetes.io/zwave
+                    operator: In
+                    values:
+                      - "true"
