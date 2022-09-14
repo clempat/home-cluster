@@ -77,6 +77,16 @@ spec:
           gnetId: 7845
           revision: 4
           datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/9875-kubernetes-resources-monitoring/
+        resources:
+          gnetId: 9875
+          revision: 4
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/11455-k8s-storage-volumes-namespace/
+        storage:
+          gnetId: 11455
+          revision: 6
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/11315
         unifi-client-insights:
           gnetId: 11315
