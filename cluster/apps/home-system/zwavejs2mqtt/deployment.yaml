@@ -29,7 +29,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: zwavejs2mqtt
-          image: "ghcr.io/zwave-js/zwavejs2mqtt:6.16.0"
+          image: "ghcr.io/zwave-js/zwavejs2mqtt:7.1.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
