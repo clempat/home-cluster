@@ -56,26 +56,21 @@ spec:
             - name: usb
               mountPath: /dev/serial/by-id/usb-0658_0200-if00
           livenessProbe:
-            tcpSocket:
+            failureThreshold: 3
+            httpGet:
+              path: /health
               port: 8091
             initialDelaySeconds: 0
-            failureThreshold: 3
-            timeoutSeconds: 1
             periodSeconds: 10
+            timeoutSeconds: 1
           readinessProbe:
-            tcpSocket:
-              port: 8091
-            initialDelaySeconds: 0
             failureThreshold: 3
-            timeoutSeconds: 1
-            periodSeconds: 10
-          startupProbe:
-            tcpSocket:
+            httpGet:
+              path: /health
               port: 8091
             initialDelaySeconds: 0
-            failureThreshold: 30
+            periodSeconds: 10
             timeoutSeconds: 1
-            periodSeconds: 5
           resources:
             limits:
               memory: 500Mi
