@@ -108,20 +108,14 @@ spec:
                   # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
                   storage: 1Gi
 
-      prometheusOperator:
-        tolerations:
-          - key: "hardware"
-            operator: "Equal"
-            value: "rpi"
-            effect: "NoExecute"
+    prometheusOperator:
+      tolerations:
+        - key: "hardware"
+          operator: "Equal"
+          value: "rpi"
+          effect: "NoExecute"
 
       prometheus:
-        prometheusSpec:
-          tolerations:
-            - key: "hardware"
-              operator: "Equal"
-              value: "rpi"
-              effect: "NoExecute"
 
         monitor:
           enabled: true
@@ -204,6 +198,11 @@ spec:
       # thanosServiceMonitor:
       #   enabled: true
       prometheusSpec:
+        tolerations:
+          - key: "hardware"
+            operator: "Equal"
+            value: "rpi"
+            effect: "NoExecute"
         replicas: 1
         replicaExternalLabelName: "replica"
         podAntiAffinity: hard
