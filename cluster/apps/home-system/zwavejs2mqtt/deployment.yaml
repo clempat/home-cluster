@@ -36,10 +36,10 @@ spec:
           env:
             - name: "NETWORK_KEY"
               value: ""
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: zwavejs2mqtt-secrets
-              #     key: NETWORK_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zwavejs2mqtt-secrets
+                  key: NETWORK_KEY
             - name: "TZ"
               value: "${TIMEZONE}"
           ports:
