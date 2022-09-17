@@ -1,0 +1,19 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: heating-metrics-sm
+  labels:
+    k8s-app: heating-metrics
+    prometheus: kube-prometheus
+spec:
+  selector:
+    matchLabels:
+      k8s-app: heating-metrics
+    namespaceSelector:
+      matchNames:
+        - monitoring
+  endpoints:
+    - port: metrics
+      interval: 10s
+      honorLabels: true
