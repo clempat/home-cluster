@@ -11,3 +11,17 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: local-path
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zwavejs2mqtt-config-v2
+  namespace: home-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: longhorn
