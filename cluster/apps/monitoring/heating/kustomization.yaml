@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - endpoints.yaml
   - services.yaml
-  - monitor.yaml
