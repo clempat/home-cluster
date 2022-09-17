@@ -90,7 +90,7 @@ spec:
             path: ${CONFIG_NFS_SERVER_PATH}/zwavejs2mqtt
         - name: config
           persistentVolumeClaim:
-            claimName: zwavejs2mqtt-config-v2
+            claimName: zwavejs2mqtt-config-v1
         - name: usb
           hostPath:
             path: /dev/serial/by-id/usb-0658_0200-if00
