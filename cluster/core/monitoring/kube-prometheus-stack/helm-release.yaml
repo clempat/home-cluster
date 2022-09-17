@@ -107,7 +107,22 @@ spec:
                 requests:
                   # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
                   storage: 1Gi
+
+      prometheusOperator:
+        tolerations:
+          - key: "hardware"
+            operator: "Equal"
+            value: "rpi"
+            effect: "NoExecute"
+
       prometheus:
+        prometheusSpec:
+          tolerations:
+            - key: "hardware"
+              operator: "Equal"
+              value: "rpi"
+              effect: "NoExecute"
+
         monitor:
           enabled: true
           relabelings:
@@ -138,7 +153,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints:
-        # - 192.168.30.119
+        - 192.168.30.134
         - 192.168.30.210
         - 192.168.30.124
       service:
@@ -148,7 +163,7 @@ spec:
     kubeScheduler:
       enabled: true
       endpoints:
-        # - 192.168.30.119
+        - 192.168.30.134
         - 192.168.30.210
         - 192.168.30.124
       service:
@@ -158,13 +173,13 @@ spec:
     kubeProxy:
       enabled: true
       endpoints:
-        # - 192.168.30.119
+        - 192.168.30.134
         - 192.168.30.210
         - 192.168.30.124
     kubeEtcd:
       enabled: true
       endpoints:
-        # - 192.168.30.119
+        - 192.168.30.134
         - 192.168.30.210
         - 192.168.30.124
       service:
