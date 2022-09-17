@@ -79,7 +79,7 @@ spec:
             periodSeconds: 5
           resources:
             limits:
-              memory: 500Mi
+              memory: 400Mi
             requests:
               cpu: 10m
               memory: 100Mi
