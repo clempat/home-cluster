@@ -111,12 +111,12 @@ spec:
     prometheus-node-exporter:
       endpoints:
         - 192.168.30.15
-      tolerations:
-        - operator: "Exists"
-        - key: "hardware"
-          operator: "Equal"
-          value: "rpi"
-          effect: "NoExecute"
+      # tolerations:
+      #   - operator: "Exists"
+      #   - key: "hardware"
+      #     operator: "Equal"
+      #     value: "rpi"
+      #     effect: "NoExecute"
 
 
     prometheusOperator:
