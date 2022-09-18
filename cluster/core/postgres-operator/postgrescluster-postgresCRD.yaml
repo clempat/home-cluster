@@ -26,7 +26,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 8Gi
+            storage: 12Gi
     - name: instance2
       dataVolumeClaimSpec:
         storageClassName: longhorn
@@ -34,7 +34,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 8Gi
+            storage: 12Gi
 
   users:
     - name: homeassistant
@@ -75,5 +75,5 @@ spec:
                 - ReadWriteMany
               resources:
                 requests:
-                  storage: 8Gi
+                  storage: 12Gi
               storageClassName: nfs-provisioner
