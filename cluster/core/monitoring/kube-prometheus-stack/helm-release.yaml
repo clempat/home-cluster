@@ -108,15 +108,18 @@ spec:
                   # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
                   storage: 1Gi
 
-    prometheusOperator:
+    prometheus-node-exporter:
+      endpoints:
+        - 192.168.30.15
       tolerations:
         - key: "hardware"
           operator: "Equal"
           value: "rpi"
           effect: "NoExecute"
 
-      prometheus:
 
+    prometheusOperator:
+      prometheus:
         monitor:
           enabled: true
           relabelings:
@@ -198,11 +201,6 @@ spec:
       # thanosServiceMonitor:
       #   enabled: true
       prometheusSpec:
-        tolerations:
-          - key: "hardware"
-            operator: "Equal"
-            value: "rpi"
-            effect: "NoExecute"
         replicas: 1
         replicaExternalLabelName: "replica"
         podAntiAffinity: hard
