@@ -112,6 +112,7 @@ spec:
       endpoints:
         - 192.168.30.15
       tolerations:
+        - operator: "Exists"
         - key: "hardware"
           operator: "Equal"
           value: "rpi"
