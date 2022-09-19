@@ -8,3 +8,5 @@ resources:
   - proxmox
   - unifi
   - truenas
+  - portainer
+  - adminer

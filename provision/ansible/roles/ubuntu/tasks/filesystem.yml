@@ -8,9 +8,10 @@
 
 - name: Disable swap at runtime
   ansible.builtin.command: swapoff -a
-  when: ansible_swaptotal_mb > 0
+  when: ansible_swaptotal_mb > 0 and ansible_hostname not in groups['portainer']
 
 - name: Disable swap on boot
+  when: ansible_hostname not in groups['portainer']
   ansible.posix.mount:
     name: "{{ item }}"
     fstype: swap
