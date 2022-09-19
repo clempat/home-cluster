@@ -62,11 +62,6 @@ spec:
           env:
             - name: TZ
               value: ${TIMEZONE}
-            - name: postgresql_uri
-              valueFrom:
-                secretKeyRef:
-                  name: pgo-cluster-pguser-homeassistant
-                  key: uri
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       securityContext:
