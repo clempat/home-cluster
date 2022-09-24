@@ -65,23 +65,23 @@ spec:
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-recipes
-                  key: host
+                  name: recipes-secrets
+                  key: POSTGRES_HOST
             - name: POSTGRES_PORT
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-recipes
-                  key: port
+                  name: recipes-secrets
+                  key: POSTGRES_PORT
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-recipes
-                  key: user
+                  name: recipes-secrets
+                  key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-recipes
-                  key: password
+                  name: recipes-secrets
+                  key: POSTGRES_PASSWORD
             - name: POSTGRES_DB
               value: recipes
             - name: DEBUG
