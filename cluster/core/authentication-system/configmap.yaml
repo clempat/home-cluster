@@ -46,13 +46,22 @@ data:
     access_control:
       default_policy: deny
       rules:
+        - domain: "auth.${SECRET_DOMAIN}"
+          policy: bypass
+        ## bypass api / triggers
+        - domain: "*.domain.com"
+          resources:
+            - "^/api([/?].*)?$"
+          policy: bypass
         - domain: "*.${SECRET_DOMAIN}"
+          subject:
+            - "group:admins"
           policy: two_factor
     session:
       name: authelia_session
       expiration: 1h
       inactivity: 15m
-      remember_me_duration: 1M
+      remember_me_duration: 2M
       domain: ${SECRET_DOMAIN}
       redis:
         host: redis.default.svc.cluster.local

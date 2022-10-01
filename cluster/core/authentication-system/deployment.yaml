@@ -44,9 +44,6 @@ spec:
             - name: authelia-secrets
               mountPath: /app/secrets
               readOnly: true
-            - name: pgo-cluster-pguser-authelia
-              mountPath: /db/secrets
-              readOnly: true
           startupProbe:
             httpGet:
               path: /api/health
@@ -86,27 +83,27 @@ spec:
             - name: AUTHELIA_SESSION_REDIS_PASSWORD_FILE
               value: /app/secrets/session_redis_password
             - name: AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE
-              value: /db/secrets/storage_postgres_password
+              value: /app/secrets/storage_postgres_password
             - name: AUTHELIA_STORAGE_POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-authelia
-                  key: host
+                  name: authelia-secrets
+                  key: authelia_storage_postgres_host
             - name: AUTHELIA_STORAGE_POSTGRES_PORT
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-authelia
-                  key: port
+                  name: authelia-secrets
+                  key: authelia_storage_postgres_port
             - name: AUTHELIA_STORAGE_POSTGRES_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-authelia
-                  key: dbname
+                  name: authelia-secrets
+                  key: authelia_storage_postgres_dbname
             - name: AUTHELIA_STORAGE_POSTGRES_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: pgo-cluster-pguser-authelia
-                  key: user
+                  name: authelia-secrets
+                  key: authelia_storage_postgres_user
             - name: TZ
               value: ${TIMEZONE}
       enableServiceLinks: false
@@ -129,9 +126,5 @@ spec:
                 path: notifier_smtp_password
               - key: authelia_session_redis_password
                 path: session_redis_password
-        - name: pgo-cluster-pguser-authelia
-          secret:
-            secretName: pgo-cluster-pguser-authelia
-            items:
-              - key: password
+              - key: authelia_storage_postgres_password
                 path: storage_postgres_password

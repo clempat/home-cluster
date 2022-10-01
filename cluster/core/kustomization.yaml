@@ -6,7 +6,7 @@ resources:
   - longhorn
   - default
   # - rook-ceph
-  # - authentication-system
+  - authentication-system
   - notification
   - cert-manager
   - kube-system
