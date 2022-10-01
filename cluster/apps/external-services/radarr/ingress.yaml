@@ -1,5 +1,5 @@
 ---
-piVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: &name radarr
@@ -14,10 +14,9 @@ spec:
       middlewares:
         - name: secure-headers
         - name: authelia
-          namespace: default
+          namespace: authentication-system
       services:
         - name: *name
           port: 7878
-          namespace: default
   tls:
-    secretName: ${SECRET_DOMAIN}-tls
+    secretName: "${SECRET_DOMAIN/./-}-tls"
