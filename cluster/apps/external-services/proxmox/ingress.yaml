@@ -25,5 +25,5 @@ spec:
                   number: 8006
   tls:
     - hosts:
-        - "proxmox.${SECRET_DOMAIN}"
-      secretName: proxmox-tls
+        - "*.${SECRET_DOMAIN}"
+      secretName: "${SECRET_DOMAIN/./-}-tls"
