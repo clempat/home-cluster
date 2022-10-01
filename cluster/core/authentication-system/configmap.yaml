@@ -13,8 +13,9 @@ data:
     server:
       host: 0.0.0.0
       port: 9091
-      read_buffer_size: 4096
-      write_buffer_size: 4096
+      buffers:
+        read: 4096
+        write: 4096
       path: ""
     log:
       level: debug
@@ -32,7 +33,8 @@ data:
       disable_startup_check: false
       disable_failure: false
     authentication_backend:
-      disable_reset_password: true
+      password_reset:
+        disable: true
       refresh_interval: 5m
       file:
         path: /config/users.yaml
