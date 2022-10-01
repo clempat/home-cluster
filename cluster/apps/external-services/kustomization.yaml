@@ -10,4 +10,4 @@ resources:
   - truenas
   - portainer
   - adminer
-  # - radarr
+  - radarr

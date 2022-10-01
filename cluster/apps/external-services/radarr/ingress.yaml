@@ -18,5 +18,6 @@ spec:
       services:
         - name: *name
           port: 7878
+          namespace: external-services
   tls:
     secretName: "${SECRET_DOMAIN/./-}-tls"
