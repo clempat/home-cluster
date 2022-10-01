@@ -74,6 +74,8 @@ data:
       ban_time: 5m
     storage:
       encryption_key: ${SECRET_AUTHELIA_ENC_KEY}
+      postgres:
+        schema: public
     notifier:
       disable_startup_check: false
       smtp:
