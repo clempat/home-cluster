@@ -13,6 +13,7 @@ spec:
       match: Host(`movie.${SECRET_DOMAIN}`)
       middlewares:
         - name: secure-headers
+          namespace: default
         - name: authelia
           namespace: authentication-system
       services:
