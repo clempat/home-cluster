@@ -12,7 +12,7 @@ resources:
   - hajimari-charts.yaml
   - infracloudio-charts.yaml
   - jetstack-charts.yaml
-  - k8s-at-home-charts.yaml
+  - bjw-s-charts.yaml
   - k8s-gateway-charts.yaml
   - metallb-charts.yaml
   - metrics-server-charts.yaml
