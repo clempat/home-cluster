@@ -1,0 +1,44 @@
+---
+version: "3"
+services:
+  vpn:
+    image: ghcr.io/bubuntux/nordlynx:2022-10-01
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PRIVATE_KEY=$PRIVATE_KEY
+      - QUERY=filters\[country_id\]=174
+      - NET_LOCAL=192.168.0.0/16,172.17.0.0/16
+      #- DNS=103.86.96.100,103.86.99.100
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+    ports:
+      - 8181:8181
+      - 8118:8118
+    restart: unless-stopped
+
+  torrent:
+    image: ghcr.io/hotio/qbittorrent:release-4.4.5
+    network_mode: service:vpn
+    environment:
+      - TZ=Europe/Warsaw
+      - PUID=1000
+      - PGUID=1000
+      - WEBUI_PORTS=8181
+    volumes:
+      - /media/nas/torrent:/downloads
+      - qbit-data:/config
+    depends_on:
+      - vpn
+
+  privoxy:
+    image: ajoergensen/privoxy
+    network_mode: service:vpn
+    depends_on:
+      - vpn
+
+volumes:
+  qbit-data:
+
+# The torrent service would be available at http://localhost:8080/
+# or anywhere inside of the local network http://192.168.1.xxx:8080
