@@ -17,3 +17,4 @@ resources:
   - postgres-operator.yaml
   - external-services.yaml
   - games.yaml
+  - media.yaml
