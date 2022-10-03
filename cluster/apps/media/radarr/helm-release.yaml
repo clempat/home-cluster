@@ -49,10 +49,10 @@ spec:
         existingClaim: radarr-config
         mountPath: /config
       data:
-        enable: true
+        enabled: true
         type: nfs
-        server: ${CONFIG_NFS_SERVER_ADDRESS}
-        path: ${MEDIA_NFS_SERVER_PATH}
+        server: "${CONFIG_NFS_SERVER_ADDRESS}"
+        path: "${MEDIA_NFS_SERVER_PATH}"
         mountPath: /data
     resources:
       requests:
