@@ -27,7 +27,7 @@ spec:
       nameOverride: *app
     image:
       repository: ghcr.io/onedr0p/radarr
-      tag: 4.2.4.6635@sha256:0848d89de846b7cc977cef28b7c1d950a773e6c4d6867dca26e615c6bf32e063
+      tag: 4.2.4.6635@sha256:764dc8b26cf05cda70bef946a60ee48f8de060dbe06b1b130669bb78911349f9
     service:
       main:
         ports:
