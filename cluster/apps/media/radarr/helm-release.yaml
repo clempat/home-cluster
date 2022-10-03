@@ -48,6 +48,13 @@ spec:
         enabled: true
         existingClaim: radarr-config
         mountPath: /config
+      downloads:
+        enable: true
+        type: nfs
+        server: ${CONFIG_NFS_SERVER_ADDRESS}
+        path: ${MEDIA_NFS_SERVER_PATH}
+        subPath: /torrents
+        mountPath: /downloads
       data:
         enable: true
         type: nfs
