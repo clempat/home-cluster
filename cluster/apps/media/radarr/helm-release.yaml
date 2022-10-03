@@ -35,17 +35,6 @@ spec:
             port: 7878
     env:
       TZ: "${TIMEZONE}"
-    ingress:
-      main:
-        enable: true
-        ingressClassName: traefik
-        hosts:
-          - host: movie.${SECRET_DOMAIN}
-            paths:
-              - path: "/"
-                pathType: prefix
-        tls:
-          - secretName: "${SECRET_DOMAIN/./-}-tls"
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
