@@ -26,8 +26,8 @@ spec:
     global:
       nameOverride: *app
     image:
-      repository: ghcr.io/k8s-at-home/radarr
-      tag: v4.2.4.6635
+      repository: ghcr.io/onedr0p/radarr
+      tag: 4.2.4.6635@sha256:0848d89de846b7cc977cef28b7c1d950a773e6c4d6867dca26e615c6bf32e063
     service:
       main:
         ports:
