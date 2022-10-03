@@ -35,6 +35,9 @@ spec:
             port: 7878
     env:
       TZ: "${TIMEZONE}"
+    envFrom:
+      - secretRef:
+          name: *app
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
