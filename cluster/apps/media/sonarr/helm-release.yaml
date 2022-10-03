@@ -23,8 +23,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 4.0.0.124@sha256:1b29bee7415176e09ba74c946f12ac0e3f7a5209d01813533dafb60b4d1dbcef
+      repository: ghcr.io/onedr0p/sonarr
+      tag: 3.0.9.1549@sha256:7b1866d0451a859017f65d80d13e18cd10f0373412739b3981798dfdd9300146
     env:
       TZ: "${TIMEZONE}"
       PUSHOVER_DEBUG: "false"
