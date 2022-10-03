@@ -36,11 +36,11 @@ radarr:
           - name: SD
             score: 1
       - trash_ids:
-          - 496f355514737f7d83bf7aa4d24f8169 # TrueHD Atmos
-          - 2f22d89048b01681dde8afe203bf2e95 # DTS X
+          # - 496f355514737f7d83bf7aa4d24f8169 # TrueHD Atmos
+          # - 2f22d89048b01681dde8afe203bf2e95 # DTS X
           # - 417804f7f2c4308c1f4c5d380d4c4475 # ATMOS (undefined)
           # - 1af239278386be2919e1bcee0bde047e # DD+ Atmos
-          # - 3cafb66171b47f226146a0770576870f # TrueHD
+          - 3cafb66171b47f226146a0770576870f # TrueHD
           - dcf3ec6938fa32445f590a4da84256cd # DTS-HD MA
           - a570d4a0e56a2874b64e5bfa55202a1b # FLAC
           - e7c2fcae07cbada050a0af3357491d7b # PCM
@@ -79,10 +79,11 @@ radarr:
           - ed38b889b31be83fda192888e2286d83 # BR-DISK -10000
           - 90cedc1fea7ea5d11298bebd3d1d3223 # EVO (no WEBDL) -1000
           - 90a6f9a284dff5103f6346090e6280c8 # LQ -10000
-          - b8cd450cbfa689c0259a01d9e29ba3d6 # 3D -10000
+          # - b8cd450cbfa689c0259a01d9e29ba3d6 # 3D -10000
           - 7357cf5161efbf8c4d5d0c30b4815ee2 # Obfuscated
           - ae9b7c9ebde1f3bd336a8cbd1ec4c5e5 # No-RlsGroup removed do avoid multiple downloads
           - dc98083864ea246d05a42df0d05f81cc # x265 (720/1080p)
+          - 9172b2f683f6223e3a1846427b417a3d
         quality_profiles:
           - name: Any
             reset_unmatched_scores: true
