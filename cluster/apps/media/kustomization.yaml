@@ -7,3 +7,5 @@ resources:
   - sonarr
   - recyclarr
   - prowlarr
+  - jellyfin
+  - jellyseerr

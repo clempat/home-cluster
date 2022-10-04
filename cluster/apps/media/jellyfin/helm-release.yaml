@@ -1,0 +1,78 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app jellyfin
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  dependsOn:
+    - name: intel-gpu-plugin
+      namespace: default
+    - name: node-feature-discovery
+      namespace: kube-system
+  values:
+    image:
+      repository: ghcr.io/onedr0p/jellyfin
+      tag: 10.8.5@sha256:b1067cc8cd7c1c1b1732694c8983ccf7fe230636018ce4ef9477c605ed5c7c54
+    env:
+      TZ: "${TIMEZONE}"
+    service:
+      main:
+        ports:
+          http:
+            port: 8096
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 44
+        - 109
+        - 100
+    persistence:
+      config:
+        enabled: true
+        existingClaim: jellyfin-config
+      data:
+        enabled: true
+        type: nfs
+        server: "${CONFIG_NFS_SERVER_ADDRESS}"
+        path: "${MEDIA_NFS_SERVER_PATH}"
+        mountPath: /data
+      transcode:
+        enabled: true
+        type: emptyDir
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: feature.node.kubernetes.io/custom-intel-gpu
+                  operator: In
+                  values:
+                    - "true"
+    resources:
+      requests:
+        gpu.intel.com/i915: 1
+        cpu: 100m
+        memory: 1000Mi
+      limits:
+        gpu.intel.com/i915: 1
+        memory: 6000Mi

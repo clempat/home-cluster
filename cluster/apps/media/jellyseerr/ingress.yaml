@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: &name jellyseerr
+  labels:
+    app.kubernetes.io/name: *name
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`requests.${SECRET_DOMAIN}`)
+      services:
+        - name: *name
+          port: 80
+          namespace: media
+  tls:
+    secretName: ${SECRET_DOMAIN/./-}-tls
