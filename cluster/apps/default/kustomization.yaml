@@ -6,3 +6,4 @@ resources:
   - hajimari
   - tatort-bot
   - uptime-kuma
+  - intel-gpu-plugin
