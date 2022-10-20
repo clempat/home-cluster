@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/jellyfin
-      tag: 10.8.5@sha256:b1067cc8cd7c1c1b1732694c8983ccf7fe230636018ce4ef9477c605ed5c7c54
+      tag: 10.8.5@sha256:854004e2b8428b9338f5863552bc57242b7f804a06dad252cf0bd4c02b07bd16
     env:
       TZ: "${TIMEZONE}"
     service:
