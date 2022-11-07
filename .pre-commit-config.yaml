@@ -2,7 +2,7 @@
 fail_fast: false
 repos:
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.27.1
+    rev: v1.28.0
     hooks:
       - args:
           - --config-file
@@ -25,10 +25,10 @@ repos:
     hooks:
       - id: fix-smartquotes
   - repo: https://github.com/k8s-at-home/sops-pre-commit
-    rev: v2.1.0
+    rev: v2.1.1
     hooks:
       - id: forbid-secrets
   - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.10.3
+    rev: v8.15.0
     hooks:
       - id: gitleaks
