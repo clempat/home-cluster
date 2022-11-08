@@ -16,3 +16,20 @@ spec:
       port: 8123
       targetPort: http
   type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homeassistant-sonos
+  labels:
+    app.kubernetes.io/name: homeassistant-sonos
+spec:
+  selector:
+    app.kubernetes.io/name: homeassistant
+  ports:
+    - name: sonos
+      protocol: TCP
+      port: 1400
+      targetPort: sonos
+  type: LoadBalancer

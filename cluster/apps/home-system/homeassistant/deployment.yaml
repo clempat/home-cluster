@@ -29,6 +29,9 @@ spec:
             - name: http
               protocol: TCP
               containerPort: 8123
+            - name: sonos
+              protocol: TCP
+              containerPort: 1400
           volumeMounts:
             - name: homeassistant-configs
               mountPath: /config
