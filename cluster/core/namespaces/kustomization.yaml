@@ -14,7 +14,6 @@ resources:
   - longhorn.yaml
   - rook-ceph.yaml
   - nfs-system.yaml
-  - postgres-operator.yaml
   - external-services.yaml
   - games.yaml
   - media.yaml
