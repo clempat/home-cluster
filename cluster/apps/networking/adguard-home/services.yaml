@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: adguard-home
   annotations:
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 53
       targetPort: 53
@@ -27,7 +27,7 @@ metadata:
     app.kubernetes.io/name: adguard-home
   annotations:
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 53
       targetPort: 53
