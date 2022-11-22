@@ -7,4 +7,4 @@ resources:
   - traefik
   - rook-ceph
   - external-snapshotter
-  - node-feature-discovery
+  # - node-feature-discovery
