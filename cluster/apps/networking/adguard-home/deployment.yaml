@@ -45,7 +45,7 @@ spec:
               name: config
       containers:
         - name: adguard-home
-          image: "adguard/adguardhome:v0.107.19"
+          image: "adguard/adguardhome:v0.107.20"
           imagePullPolicy: IfNotPresent
           args:
 
