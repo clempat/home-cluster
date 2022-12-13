@@ -46,7 +46,7 @@ spec:
             - "echo-server.${SECRET_DOMAIN}"
     resources:
       requests:
-        cpu: 50m
+        cpu: 100m
         memory: 64Mi
       limits:
         memory: 96Mi
