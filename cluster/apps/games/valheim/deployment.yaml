@@ -67,7 +67,10 @@ spec:
 
 
           resources:
-            {}
+          limits:
+            memory: "7Gi"
+          requests:
+            memory: "5Gi"
       volumes:
         - name: gamefiles
           persistentVolumeClaim:
