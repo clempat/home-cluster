@@ -7,3 +7,4 @@ resources:
   - tatort-bot
   - uptime-kuma
   - intel-gpu-plugin
+  - smtp-relay
