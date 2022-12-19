@@ -1,6 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: default
 resources:
   - echo-server
   - hajimari
@@ -8,3 +9,4 @@ resources:
   - uptime-kuma
   - intel-gpu-plugin
   - smtp-relay
+  - n8n
