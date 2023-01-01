@@ -112,7 +112,10 @@ spec:
       endpoints:
         - 192.168.30.15
       tolerations:
-        - operator: "Exists"
+        - effect: "NoExecute"
+          operator: "Exists"
+        - effect: "NoSchedule"
+          operator: "Exists"
         - key: "hardware"
           operator: "Equal"
           value: "rpi"
