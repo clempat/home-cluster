@@ -13,9 +13,6 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: authelia
-  dependsOn:
-    - name: pgo-cluster
-      namespace: default
   template:
     metadata:
       labels:
