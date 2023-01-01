@@ -12,3 +12,4 @@ resources:
   - monitoring
   - games
   - media
+  - traefik-system

@@ -5,7 +5,7 @@ metadata:
   name: traefik-dynamic-config
   labels:
     name: traefik-config
-  namespace: networking
+  namespace: traefik-system
 data:
   dynamic.yaml: |
     tls:

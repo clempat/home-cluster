@@ -7,5 +7,4 @@ resources:
   - external-dns
   - k8s-gateway
   - wildcard-tls
-  - traefik
   # - adguard-home
