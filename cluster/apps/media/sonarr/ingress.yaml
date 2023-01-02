@@ -13,7 +13,7 @@ spec:
       match: Host(`tv.${SECRET_DOMAIN}`)
       middlewares:
         - name: secure-headers
-          namespace: networking
+          namespace: traefik-system
         - name: authelia
           namespace: authentication-system
       services:
