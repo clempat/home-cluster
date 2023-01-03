@@ -35,9 +35,11 @@
       become: false
       run_once: true
       check_mode: false
-      ansible.builtin.command: |-
+      ansible.builtin.shell: |-
         git rev-parse --show-toplevel
       register: repo_abs_path
+      args:
+        executable: /usr/bin/env
 
     - name: Copy kubeconfig project directory
       run_once: true
@@ -54,7 +56,7 @@
       become: false
       run_once: true
       ansible.builtin.replace:
-        path: "{{ repo_abs_path.stdout }}/provision/kubeconfig"
+        path: "{{ repo_abs_path.stdout }}/kubeconfig"
         regexp: "https://127.0.0.1:6443"
         replace: "https://{{ k3s_registration_address }}:6443"
 

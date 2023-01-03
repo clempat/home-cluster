@@ -207,7 +207,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 
 ### ⛵ Installing k3s with Ansible
 
-📍 Here we will be running a Ansible Playbook to install [k3s](https://k3s.io/) with [this](https://galaxy.ansible.com/xanmanning/k3s) wonderful k3s Ansible galaxy role. After completion, Ansible will drop a `kubeconfig` in `./provision/kubeconfig` for use with interacting with your cluster with `kubectl`.
+📍 Here we will be running a Ansible Playbook to install [k3s](https://k3s.io/) with [this](https://galaxy.ansible.com/xanmanning/k3s) wonderful k3s Ansible galaxy role. After completion, Ansible will drop a `kubeconfig` in `./kubeconfig` for use with interacting with your cluster with `kubectl`.
 
 1. Verify Ansible can view your config by running `task ansible:list`
 
@@ -220,7 +220,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 5. Verify the nodes are online
 
 ```sh
-kubectl --kubeconfig=./provision/kubeconfig get nodes
+kubectl --kubeconfig=./kubeconfig get nodes
 # NAME           STATUS   ROLES                       AGE     VERSION
 # k8s-0          Ready    control-plane,master      4d20h   v1.21.5+k3s1
 # k8s-1          Ready    worker                    4d20h   v1.21.5+k3s1
@@ -228,7 +228,7 @@ kubectl --kubeconfig=./provision/kubeconfig get nodes
 
 ### ☁️ Configuring Cloudflare DNS with Terraform
 
-📍 Review the Terraform scripts under `./provision/terraform/cloudflare/` and make sure you understand what it's doing (no really review it). If your domain already has existing DNS records **be sure to export those DNS settings before you continue**.
+📍 Review the Terraform scripts under `./terraform/cloudflare/` and make sure you understand what it's doing (no really review it). If your domain already has existing DNS records **be sure to export those DNS settings before you continue**.
 
 1. Pull in the Terraform deps by running `task terraform:init:cloudflare`
 
@@ -245,7 +245,7 @@ If Terraform was ran successfully you can log into Cloudflare and validate the D
 1. Verify Flux can be installed
 
 ```sh
-flux --kubeconfig=./provision/kubeconfig check --pre
+flux --kubeconfig=./kubeconfig check --pre
 # ► checking prerequisites
 # ✔ kubectl 1.21.5 >=1.18.0-0
 # ✔ Kubernetes 1.21.5+k3s1 >=1.16.0-0
@@ -255,21 +255,21 @@ flux --kubeconfig=./provision/kubeconfig check --pre
 2. Pre-create the `flux-system` namespace
 
 ```sh
-kubectl --kubeconfig=./provision/kubeconfig create namespace flux-system --dry-run=client -o yaml | kubectl --kubeconfig=./provision/kubeconfig apply -f -
+kubectl --kubeconfig=./kubeconfig create namespace flux-system --dry-run=client -o yaml | kubectl --kubeconfig=./kubeconfig apply -f -
 ```
 
 3. Add the Age key in-order for Flux to decrypt SOPS secrets
 
 ```sh
 cat ~/.config/sops/age/keys.txt |
-    kubectl --kubeconfig=./provision/kubeconfig \
+    kubectl --kubeconfig=./kubeconfig \
     -n flux-system create secret generic sops-age \
     --from-file=age.agekey=/dev/stdin
 ```
 
-📍 Variables defined in `./cluster/base/cluster-secrets.sops.yaml` and `./cluster/base/cluster-settings.yaml` will be usable anywhere in your YAML manifests under `./cluster`
+📍 Variables defined in `./kubernetes/base/cluster-secrets.sops.yaml` and `./kubernetes/base/cluster-settings.yaml` will be usable anywhere in your YAML manifests under `./cluster`
 
-4. **Verify** the `./cluster/base/cluster-secrets.sops.yaml` and `./cluster/core/cert-manager/secret.sops.yaml` files are **encrypted** with SOPS
+4. **Verify** the `./kubernetes/base/cluster-secrets.sops.yaml` and `./kubernetes/core/cert-manager/secret.sops.yaml` files are **encrypted** with SOPS
 
 5. If you verified all the secrets are encrypted, you can delete the `tmpl` directory now
 
@@ -286,22 +286,22 @@ git push
 📍 Due to race conditions with the Flux CRDs you will have to run the below command twice. There should be no errors on this second run.
 
 ```sh
-kubectl --kubeconfig=./provision/kubeconfig apply --kustomize=./cluster/base/flux-system
+kubectl --kubeconfig=./kubeconfig apply --kustomize=./kubernetes/base/flux-system
 # namespace/flux-system configured
 # customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io created
 # ...
-# unable to recognize "./cluster/base/flux-system": no matches for kind "Kustomization" in version "kustomize.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "GitRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+# unable to recognize "./kubernetes/base/flux-system": no matches for kind "Kustomization" in version "kustomize.toolkit.fluxcd.io/v1beta1"
+# unable to recognize "./kubernetes/base/flux-system": no matches for kind "GitRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+# unable to recognize "./kubernetes/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+# unable to recognize "./kubernetes/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+# unable to recognize "./kubernetes/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+# unable to recognize "./kubernetes/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
 ```
 
 8. Verify Flux components are running in the cluster
 
 ```sh
-kubectl --kubeconfig=./provision/kubeconfig get pods -n flux-system
+kubectl --kubeconfig=./kubeconfig get pods -n flux-system
 # NAME                                       READY   STATUS    RESTARTS   AGE
 # helm-controller-5bbd94c75-89sb4            1/1     Running   0          1h
 # kustomize-controller-7b67b6b77d-nqc67      1/1     Running   0          1h
