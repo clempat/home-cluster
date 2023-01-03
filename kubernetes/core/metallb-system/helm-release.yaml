@@ -3,16 +3,16 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: metallb
-  namespace: metallb-system
+  namespace: networking
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       chart: metallb
       version: 0.13.7
       sourceRef:
         kind: HelmRepository
-        name: metallb-charts
+        name: metallb
         namespace: flux-system
   install:
     createNamespace: true
@@ -21,3 +21,8 @@ spec:
   upgrade:
     remediation:
       retries: 3
+  values:
+    crds:
+      enabled: true
+    psp:
+      create: false
