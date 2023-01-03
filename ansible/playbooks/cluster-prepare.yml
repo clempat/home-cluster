@@ -40,6 +40,7 @@
     - name: Packages | Ubuntu
       block:
         - name: Packages | Install required packages
+          ignore_errors: true
           ansible.builtin.apt:
             name: "{{ ubuntu.packages | default([]) }}"
             state: present
@@ -134,6 +135,12 @@
             state: permissive
             policy: targeted
           when: ansible_facts['distribution'] == 'Fedora'
+        - name: Start iscsid
+          ansible.builtin.service:
+            name: "{{ item }}"
+            state: started
+          loop:
+            - iscsid
       notify: Reboot
 
   handlers:

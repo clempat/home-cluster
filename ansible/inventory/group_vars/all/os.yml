@@ -1,0 +1,50 @@
+---
+# (string) Timezone for the servers
+timezone: "Europe/Berlin"
+
+# (list) Additional ssh public keys to add to the nodes
+# ssh_authorized_keys:
+
+fedora:
+  packages:
+    - dnf-plugin-system-upgrade
+    - dnf-utils
+    - hdparm
+    - htop
+    - intel-gpu-tools
+    - ipvsadm
+    - lm_sensors
+    - nano
+    - nvme-cli
+    - socat
+    - python3-kubernetes
+    - python3-libselinux
+    - python3-pyyaml
+
+ubuntu:
+  packages:
+    - apt-transport-https
+    - arptables
+    - ca-certificates
+    - curl
+    - ebtables
+    - hdparm
+    - htop
+    - intel-gpu-tools
+    - iputils-ping
+    - ipvsadm
+    - lm-sensors
+    - lvm2
+    - nano
+    - net-tools
+    - nfs-common
+    - nvme-cli
+    - open-iscsi
+    - psmisc
+    - python3-kubernetes
+    - python3-yaml
+    - qemu-guest-agent
+    - smartmontools
+    - socat
+    - software-properties-common
+    - unattended-upgrades
