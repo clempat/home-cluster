@@ -35,11 +35,9 @@
       become: false
       run_once: true
       check_mode: false
-      ansible.builtin.shell: |-
+      ansible.builtin.command: |-
         git rev-parse --show-toplevel
       register: repo_abs_path
-      args:
-        executable: /usr/bin/env
 
     - name: Copy kubeconfig project directory
       run_once: true
