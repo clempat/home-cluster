@@ -1,19 +1,28 @@
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: &name jellyfin
+  name: &app jellyfin
   labels:
-    app.kubernetes.io/name: *name
+    app.kubernetes.io/name: *app
+  annotations:
+    hajimari.io/enable: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`media.${SECRET_DOMAIN}`)
-      services:
-        - name: *name
-          port: 8096
-          namespace: media
+  ingressClassName: "traefik"
+  rules:
+    - host: "media.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: *app
+                port:
+                  number: 8096
   tls:
-    secretName: ${SECRET_DOMAIN/./-}-tls
+    - hosts:
+        - "media.${SECRET_DOMAIN}"
+      secretName: media-tls
