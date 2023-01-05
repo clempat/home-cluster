@@ -39,7 +39,7 @@ metadata:
   labels:
     app.kubernetes.io/name: valheim
 spec:
-  storageClassName: longhorn-static
+  storageClassName: longhorn
   accessModes:
     - "ReadWriteOnce"
   resources:
