@@ -17,4 +17,3 @@ resources:
   - external-services.yaml
   - games.yaml
   - media.yaml
-  - traefik-system.yaml
