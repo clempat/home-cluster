@@ -109,8 +109,6 @@ spec:
                   storage: 1Gi
 
     prometheus-node-exporter:
-      endpoints:
-        - 192.168.30.15
       tolerations:
         - effect: "NoExecute"
           operator: "Exists"
