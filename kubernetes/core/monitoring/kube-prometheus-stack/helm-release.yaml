@@ -116,11 +116,6 @@ spec:
           operator: "Exists"
         - effect: "NoSchedule"
           operator: "Exists"
-        - key: "hardware"
-          operator: "Equal"
-          value: "rpi"
-          effect: "NoExecute"
-
 
     prometheusOperator:
       prometheus:
