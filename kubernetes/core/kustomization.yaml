@@ -11,5 +11,5 @@ resources:
   - cert-manager
   - kube-system
   - metallb-system
-  - monitoring
+  # - monitoring
   - nfs-system
