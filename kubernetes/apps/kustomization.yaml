@@ -9,6 +9,6 @@ resources:
   - home-system
   # - kasten-io
   - external-services
-  - monitoring
+  # - monitoring
   - games
-  - media
+  # - media
