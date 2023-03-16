@@ -11,4 +11,4 @@ resources:
   - external-services
   # - monitoring
   - games
-  # - media
+  - media
