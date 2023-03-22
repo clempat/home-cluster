@@ -5,7 +5,7 @@ namespace: default
 resources:
   - echo-server
   - hajimari
-  - tatort-bot
+  # - tatort-bot
   - uptime-kuma
   - intel-gpu-plugin
   - smtp-relay
