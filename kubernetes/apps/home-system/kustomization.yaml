@@ -5,8 +5,8 @@ namespace: home-system
 resources:
   - homeassistant
   - mosquitto
-  - motioneye
-  - frigate
+  # - motioneye
+  # - frigate
   - esphome
   # - zwavejs2mqtt
   - hyperion
