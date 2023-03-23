@@ -8,6 +8,6 @@ resources:
   - motioneye
   - frigate
   - esphome
-  - zwavejs2mqtt
+  # - zwavejs2mqtt
   - hyperion
   - recipes
