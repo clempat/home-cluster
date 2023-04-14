@@ -4,7 +4,7 @@ creation_rules:
     unencrypted_regex: "^(kind)$"
     age: >-
       age1ksuvc69hvx8eup9g4g4m5lklhkmmmh4ddjdqfdsusaq50vu2846qu56ltl
-  - path_regex: .*secret\.ya?ml
+  - path_regex: .*secrets?\.ya?ml
     unencrypted_regex: "^(kind)$"
     age: >-
       age1ksuvc69hvx8eup9g4g4m5lklhkmmmh4ddjdqfdsusaq50vu2846qu56ltl
