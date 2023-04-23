@@ -7,7 +7,7 @@ resources:
   - mosquitto
   # - motioneye
   # - frigate
-  - esphome
+  # - esphome
   # - zwavejs2mqtt
-  - hyperion
-  - recipes
+  # - hyperion
+  # - recipes
