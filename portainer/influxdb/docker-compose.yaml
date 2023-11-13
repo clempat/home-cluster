@@ -3,7 +3,7 @@ version: '3'
 
 services:
   database:
-    image: 'influxdb:2.6'
+    image: 'influxdb:2.7'
     restart: always
 
     ports:
