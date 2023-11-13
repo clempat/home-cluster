@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: recipes
-          image: vabene1111/recipes:1.4.7
+          image: vabene1111/recipes:1.5.6
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
